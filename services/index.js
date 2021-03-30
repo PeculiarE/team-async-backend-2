@@ -2,7 +2,9 @@ import {
   getSingleUserByEmail, addNewUser,
   newApplication,
 } from './user';
-import { getSingleAdminByEmail, setNewApplication, checkBatchId } from './admin';
+import {
+  getSingleAdminByEmail, setNewApplication, checkBatchId, addQuestions,
+} from './admin';
 
 export {
   getSingleUserByEmail,
@@ -11,4 +13,5 @@ export {
   newApplication,
   setNewApplication,
   checkBatchId,
+  addQuestions,
 };
