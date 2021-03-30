@@ -1,8 +1,11 @@
 import {
+  loginAdmin, authVerified, sendNewApplication, populateQuestions,
+} from './admin';
+import {
   createApplication, registerNewUser, loginUser, returnSingleUser,
 } from './user';
-import { loginAdmin, authVerified } from './admin';
 
 export {
-  createApplication, registerNewUser, loginUser, loginAdmin, authVerified, returnSingleUser,
+  createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
+  populateQuestions, returnSingleUser,
 };

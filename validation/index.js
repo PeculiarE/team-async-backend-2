@@ -1,7 +1,10 @@
 import { signUpSchema, loginSchema, applicationSchema } from './user';
-import loginAdminSchema from './admin';
+import { loginAdminSchema, applicationAdminSchema } from './admin';
 
 export {
   signUpSchema,
-  loginSchema, loginAdminSchema, applicationSchema,
+  loginSchema,
+  loginAdminSchema,
+  applicationSchema,
+  applicationAdminSchema,
 };

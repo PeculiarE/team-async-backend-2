@@ -1,9 +1,9 @@
-import cloudinaryUpload from './upload';
+import { cloudinaryUpload, cloudinaryUploadTwo } from './upload';
 import {
   validateNewUserData, checkIfUserAlreadyExists, validateLoginData, validateApplication,
   getUserProfile,
 } from './user';
-import validateAdminLoginData from './admin';
+import { validateAdminLoginData, validateAdminApplication, checkIfBatchAlreadyExists } from './admin';
 import authenticate from './auth';
 
 export {
@@ -11,8 +11,11 @@ export {
   checkIfUserAlreadyExists,
   validateLoginData,
   validateAdminLoginData,
+  validateAdminApplication,
   authenticate,
   cloudinaryUpload,
+  cloudinaryUploadTwo,
   validateApplication,
   getUserProfile,
+  checkIfBatchAlreadyExists,
 };
