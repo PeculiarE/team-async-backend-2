@@ -5,9 +5,10 @@ export const getAdminByEmail = `
 
 export const insertNewApplication = `insert into application_info (
     batch_id,
+    design_url,
     application_link,
     closure_date,
-    instructions) values ($1, $2, $3, $4);
+    instructions) values ($1, $2, $3, $4, $5);
 `;
 
 export const getBatchId = `

@@ -7,6 +7,7 @@ export const loginAdminSchema = Joi.object({
 
 export const applicationAdminSchema = Joi.object({
   batchId: Joi.number().min(1).required(),
+  design: Joi.string(),
   applicationLink: Joi.string().trim().required(),
   closureDate: Joi.date().required(),
   instructions: Joi.string().min(15).required(),

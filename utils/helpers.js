@@ -38,9 +38,19 @@ const cloudinaryConfig = async (cvPath, photoPath) => {
     return (error);
   }
 };
+const cloudinaryConfigAd = async (designPath) => {
+  try {
+    const designData = await cloudinary.v2.uploader.upload(designPath);
+    const data = [designData];
+    return data;
+  } catch (error) {
+    return (error);
+  }
+};
 
 export {
   cloudinaryConfig,
   generateUUID,
   convertDataToToken, verifyToken, hashPassword, comparePassword,
+  cloudinaryConfigAd,
 };
