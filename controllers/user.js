@@ -1,4 +1,5 @@
 import { addNewUser, getSingleUserByEmail, newApplication } from '../services';
+import { getSingleUserById } from '../services/user';
 
 import { hashPassword, comparePassword, convertDataToToken } from '../utils';
 
@@ -32,6 +33,7 @@ export const loginUser = async (req, res) => {
         status: 'Success',
         message: 'Login successful',
         token,
+        userId: user.user_id,
       });
     }
     return res.status(401).json({
@@ -51,6 +53,7 @@ export const createApplication = async (req, res) => {
   const user = req.user.user_id;
   try {
     const applicantDeets = await newApplication(user, body);
+    console.log(applicantDeets);
     res.status(201).json({
       status: 'success',
       message: 'Application successful.',
@@ -61,5 +64,19 @@ export const createApplication = async (req, res) => {
       status: 'fail',
       message: 'Something went wronger.',
     });
+  }
+};
+
+export const returnSingleUser = async (req, res) => {
+  try {
+    const currentUser = await getSingleUserById(req.params.userid);
+    delete currentUser.password;
+    res.status(200).json({
+      status: 'Success',
+      message: 'User fetched successfully',
+      data: currentUser,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
   }
 };

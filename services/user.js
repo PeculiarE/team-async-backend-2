@@ -1,7 +1,7 @@
 import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
-  getUserByEmail, insertNewUser, updateUser,
+  getUserByEmail, insertNewUser, updateUser, getUserById,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.oneOrNone(getUserByEmail, [email]);
@@ -32,3 +32,5 @@ export const newApplication = async (userId, data) => {
     batchId,
     userId]);
 };
+
+export const getSingleUserById = async (userid) => db.oneOrNone(getUserById, [userid]);
