@@ -1,6 +1,6 @@
 import { createApplication, registerNewUser, loginUser } from './user';
-import { loginAdmin, authVerified } from './admin';
+import { loginAdmin, authVerified, sendNewApplication } from './admin';
 
 export {
-  createApplication, registerNewUser, loginUser, loginAdmin, authVerified,
+  createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
 };

@@ -1,4 +1,4 @@
-import { getSingleAdminByEmail } from '../services';
+import { getSingleAdminByEmail, setNewApplication } from '../services';
 
 import { convertDataToToken } from '../utils';
 
@@ -37,6 +37,21 @@ export const authVerified = async (req, res) => {
     return res.status(200).json({
       status: 'Success',
       message,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong',
+    });
+  }
+};
+
+export const sendNewApplication = async (req, res) => {
+  try {
+    await setNewApplication(req.body);
+    return res.status(200).json({
+      status: 'Success',
+      message: 'Application advert sent successfully',
     });
   } catch (error) {
     return res.status(500).json({
