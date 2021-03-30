@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  loginAdmin, authVerified, sendNewApplication, populateQuestionsTable,
+  loginAdmin, authVerified, sendNewApplication, populateQuestions,
 } from '../controllers';
 import {
   validateAdminLoginData,
@@ -15,6 +15,6 @@ const adminRouter = Router();
 adminRouter.post('/adminlogin', validateAdminLoginData, loginAdmin);
 adminRouter.get('/adminverify', authenticate, authVerified);
 adminRouter.post('/adminapplication', authenticate, cloudinaryUploadTwo, validateAdminApplication, checkIfBatchAlreadyExists, sendNewApplication);
-adminRouter.post('/batch', populateQuestionsTable);
+adminRouter.post('/adminquestions', authenticate, populateQuestions);
 
 export default adminRouter;
