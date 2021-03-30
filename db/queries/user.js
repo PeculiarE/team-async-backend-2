@@ -25,3 +25,8 @@ export const getUserByEmail = `
     select * from user_table
     where email = $1;
 `;
+
+export const getUserById = `
+    select * from user_table
+    where user_id = $1;
+`;
