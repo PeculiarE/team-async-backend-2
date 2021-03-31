@@ -1,5 +1,5 @@
 import {
-  loginAdmin, authVerified, sendNewApplication, populateQuestions,
+  loginAdmin, authVerified, sendNewApplication, populateQuestions, updateTheAdmin,
 } from './admin';
 import {
   createApplication, registerNewUser, loginUser, returnSingleUser, retrieveQuestions,
@@ -7,5 +7,5 @@ import {
 
 export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
-  populateQuestions, returnSingleUser, retrieveQuestions,
+  populateQuestions, returnSingleUser, retrieveQuestions, updateTheAdmin,
 };

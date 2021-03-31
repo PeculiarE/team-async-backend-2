@@ -1,10 +1,14 @@
-import { cloudinaryUpload, cloudinaryUploadTwo } from './upload';
+import { cloudinaryUpload, cloudinaryUploadTwo, cloudinaryUploadThree } from './upload';
 import {
   validateNewUserData,
   checkIfUserAlreadyExistsForCurrentBatch, validateLoginData, validateApplication,
   getUserProfile, getUserBatch,
 } from './user';
-import { validateAdminLoginData, validateAdminApplication, checkIfBatchAlreadyExists } from './admin';
+import {
+  validateAdminLoginData, validateAdminApplication,
+  checkIfBatchAlreadyExists, validateAdminUpdateData,
+  getAdminProfile,
+} from './admin';
 import authenticate from './auth';
 
 export {
@@ -20,4 +24,7 @@ export {
   getUserProfile,
   checkIfBatchAlreadyExists,
   getUserBatch,
+  validateAdminUpdateData,
+  cloudinaryUploadThree,
+  getAdminProfile,
 };

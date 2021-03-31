@@ -40,3 +40,14 @@ export const insertAssessmentDetails = `insert into assessment_details (
     total_questions,
     total_time) values ($1, $2, $3, $4);
 `;
+
+export const updateAdmin = `
+    UPDATE admin_table
+    SET
+    full_name = $1,
+    email = $2,
+    phone = $3,
+    address = $4,
+    country = $5,
+    photo_url = $6,
+    updated_at = NOW() WHERE admin_id = $7;`;

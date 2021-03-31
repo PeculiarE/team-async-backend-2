@@ -1,4 +1,6 @@
-import { getSingleAdminByEmail, setNewApplication, addQuestions } from '../services';
+import {
+  getSingleAdminByEmail, setNewApplication, addQuestions, updateAdminDetails,
+} from '../services';
 
 import { convertDataToToken } from '../utils';
 
@@ -56,7 +58,7 @@ export const sendNewApplication = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: 'Fail',
-      message: 'Something went wronge',
+      message: 'Something went wrong',
     });
   }
 };
@@ -68,6 +70,22 @@ export const populateQuestions = async (req, res) => {
     return res.status(200).json({
       status: 'Success',
       message: 'Questions added successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong',
+    });
+  }
+};
+export const updateTheAdmin = async (req, res) => {
+  try {
+    const { body } = req;
+    const admin = req.admin.admin_id;
+    await updateAdminDetails(admin, body);
+    return res.status(200).json({
+      status: 'Success',
+      message: 'Details updated successfully',
     });
   } catch (error) {
     return res.status(500).json({

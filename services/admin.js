@@ -1,7 +1,7 @@
 import db from '../db/setup';
 import {
   getAdminByEmail, insertNewApplication, getBatchId, getCurrentBatch, insertQuestions,
-  insertAssessmentDetails,
+  insertAssessmentDetails, updateAdmin,
 } from '../db/queries/admin';
 
 export const getSingleAdminByEmail = async (email) => db.oneOrNone(getAdminByEmail, [email]);
@@ -47,4 +47,18 @@ export const addQuestions = async (adminId, data) => {
     totalQuestions,
     extraDetails[0],
   ]);
+};
+
+export const updateAdminDetails = async (adminId, data) => {
+  const {
+    fullName, email, phone, address, country, photo,
+  } = data;
+  db.none(updateAdmin, [
+    fullName,
+    email,
+    phone,
+    address,
+    country,
+    photo,
+    adminId]);
 };

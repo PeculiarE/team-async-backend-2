@@ -109,6 +109,7 @@ export const getUserProfile = async (req, res, next) => {
   }
 };
 
+// retrieving questions
 export const getUserBatch = async (req, res, next) => {
   try {
     const userId = req.entrant.id;

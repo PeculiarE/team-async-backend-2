@@ -3,7 +3,7 @@ import {
   newApplication, getQuestions, getSingleUserById,
 } from './user';
 import {
-  getSingleAdminByEmail, setNewApplication, checkBatchId, addQuestions,
+  getSingleAdminByEmail, setNewApplication, checkBatchId, addQuestions, updateAdminDetails,
 } from './admin';
 
 export {
@@ -17,4 +17,5 @@ export {
   addQuestions,
   getQuestions,
   getSingleUserById,
+  updateAdminDetails,
 };
