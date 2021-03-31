@@ -1,10 +1,11 @@
 import db from '../db/setup';
 import {
   getAdminByEmail, insertNewApplication, getBatchId, getCurrentBatch, insertQuestions,
-  insertAssessmentDetails,
+  insertAssessmentDetails, fetchAllUsers, updateUserStatusbyEmail,
 } from '../db/queries/admin';
 
 export const getSingleAdminByEmail = async (email) => db.oneOrNone(getAdminByEmail, [email]);
+export const getAllUsers = async () => db.manyOrNone(fetchAllUsers);
 
 export const setNewApplication = async (data) => {
   const {
@@ -47,4 +48,9 @@ export const addQuestions = async (adminId, data) => {
     totalQuestions,
     extraDetails[0],
   ]);
+};
+
+export const updateUserbyAdmin = async (data, email) => {
+  const { applicationStatus } = data;
+  return db.oneOrNone(updateUserStatusbyEmail, [applicationStatus, email]);
 };

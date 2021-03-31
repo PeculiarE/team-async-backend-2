@@ -1,11 +1,10 @@
 import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
-  getUserByEmail, insertNewUser, updateUser, getUserById,
+  getUserByEmail, insertNewUser, updateUser, getUserById, updateUserPasswordById,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.oneOrNone(getUserByEmail, [email]);
-
 export const addNewUser = async (data) => {
   const id = generateUUID();
   const {
@@ -34,3 +33,7 @@ export const newApplication = async (userId, data) => {
 };
 
 export const getSingleUserById = async (userid) => db.oneOrNone(getUserById, [userid]);
+export const updateUserPassword = async (data, email) => {
+  const { password } = data;
+  return db.one(updateUserPasswordById, [password, email]);
+};

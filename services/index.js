@@ -1,9 +1,12 @@
 import {
   getSingleUserByEmail, addNewUser,
-  newApplication,
+  newApplication, updateUserPassword,
 } from './user';
 import {
-  getSingleAdminByEmail, setNewApplication, checkBatchId, addQuestions,
+  getSingleAdminByEmail,
+  getAllUsers,
+  updateUserbyAdmin,
+  setNewApplication, checkBatchId, addQuestions,
 } from './admin';
 
 export {
@@ -14,4 +17,7 @@ export {
   setNewApplication,
   checkBatchId,
   addQuestions,
+  updateUserPassword,
+  getAllUsers,
+  updateUserbyAdmin,
 };

@@ -30,3 +30,12 @@ export const getUserById = `
     select * from user_table
     where user_id = $1;
 `;
+
+export const updateUserPasswordById = `
+update user_table
+set 
+  password = $1,
+  updated_at = NOW()
+where email = $2
+returning *;
+`;
