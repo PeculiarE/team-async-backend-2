@@ -56,7 +56,7 @@ export const sendNewApplication = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: 'Fail',
-      message: 'Something went wrong',
+      message: 'Something went wronge',
     });
   }
 };
@@ -64,11 +64,10 @@ export const sendNewApplication = async (req, res) => {
 export const populateQuestions = async (req, res) => {
   try {
     const adminId = req.entrant.id;
-    const table = await addQuestions(adminId, req.body.arr);
+    await addQuestions(adminId, req.body.arr);
     return res.status(200).json({
       status: 'Success',
       message: 'Questions added successfully',
-      data: table,
     });
   } catch (error) {
     return res.status(500).json({

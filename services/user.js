@@ -5,7 +5,7 @@ import {
   insertNewUser, updateUser, getUserById, selectQuestionsByBatchId, getCurrentBatchUser,
 } from '../db/queries/user';
 
-export const getSingleUserByEmail = async (email) => db.oneOrNone(getUserByEmail, [email]);
+export const getSingleUserByEmail = async (email) => db.manyOrNone(getUserByEmail, [email]);
 
 export const checkCurrentBatchUser = async () => db.one(getCurrentBatchUser);
 
@@ -15,7 +15,7 @@ export const addNewUser = async (data) => {
   const {
     email, fullName, password, phone,
   } = data;
-  return db.none(insertNewUser, [userId, batchId, fullName, email, phone, password]);
+  return db.none(insertNewUser, [userId, batchId.max, fullName, email, phone, password]);
 };
 
 export const newApplication = async (userId, data) => {

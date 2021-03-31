@@ -24,11 +24,22 @@ export const validateNewUserData = (req, res, next) => {
 export const checkIfUserAlreadyExistsForCurrentBatch = async (req, res, next) => {
   try {
     const user = await getSingleUserByEmail(req.body.email);
+    const batchId = await checkCurrentBatchUser();
+    console.log(user.length);
     if (!user) {
       return next();
     }
-    const batchId = await checkCurrentBatchUser();
-    if (user.batch_id === batchId) {
+    if (user.length === 0) {
+      if (user.batch_id === batchId.max) {
+        return res.status(409).json({
+          status: 'Fail',
+          message: 'User already exists!',
+        });
+      }
+      return next();
+    }
+    const latest = user[user.length - 1];
+    if (latest.batch_id === batchId.max) {
       return res.status(409).json({
         status: 'Fail',
         message: 'User already exists!',
@@ -81,7 +92,7 @@ export const validateApplication = (req, res, next) => {
 
 export const getUserProfile = async (req, res, next) => {
   try {
-    const applicant = await getSingleUserByEmail(req.body.email);
+    const applicant = await getSingleUserById(req.entrant.id);
     if (applicant) {
       req.user = applicant;
       return next();

@@ -29,14 +29,39 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const batchId = await checkCurrentBatchUser();
+    console.log(batchId);
     const user = await getSingleUserByEmail(email);
-    if (user && (user.batch_id === batchId) && comparePassword(password, user.password)) {
-      const token = convertDataToToken({ email, id: user.user_id });
+    console.log(user);
+    if (!user) {
+      return res.status(401).json({
+        status: 'Fail',
+        message: 'Invalid login details',
+      });
+    }
+    if (user.length === 0) {
+      if ((user.batch_id === batchId.max) && comparePassword(password, user.password)) {
+        const token = convertDataToToken({ email, id: user.user_id });
+        return res.status(201).json({
+          status: 'Success',
+          message: 'Login successful',
+          token,
+          userId: user.user_id,
+        });
+      }
+      return res.status(401).json({
+        status: 'Fail',
+        message: 'Invalid login details',
+      });
+    }
+    const latest = user[user.length - 1];
+    console.log(latest);
+    if ((latest.batch_id === batchId.max) && comparePassword(password, latest.password)) {
+      const token = convertDataToToken({ email, id: latest.user_id });
       return res.status(201).json({
         status: 'Success',
         message: 'Login successful',
         token,
-        userId: user.user_id,
+        userId: latest.user_id,
       });
     }
     return res.status(401).json({
@@ -46,7 +71,7 @@ export const loginUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: 'Fail',
-      message: 'Something went wrong',
+      message: 'Something went wronga',
     });
   }
 };
