@@ -27,7 +27,7 @@ export const addQuestions = async (adminId, data) => {
     const {
       questionId, question, optionA, optionB, optionC, optionD, ans,
     } = el;
-    return db.one(insertQuestions, [
+    return db.none(insertQuestions, [
       questionId,
       batchId.max,
       adminId,
@@ -41,7 +41,7 @@ export const addQuestions = async (adminId, data) => {
       extraDetails[0],
     ]);
   });
-  return db.one(insertAssessmentDetails, [
+  return db.none(insertAssessmentDetails, [
     batchId.max,
     extraDetails[1],
     totalQuestions,

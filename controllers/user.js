@@ -1,5 +1,6 @@
-import { addNewUser, getSingleUserByEmail, newApplication } from '../services';
-import { getSingleUserById } from '../services/user';
+import {
+  addNewUser, getSingleUserByEmail, newApplication, getSingleUserById, getQuestions,
+} from '../services';
 
 import { hashPassword, comparePassword, convertDataToToken } from '../utils';
 
@@ -75,6 +76,19 @@ export const returnSingleUser = async (req, res) => {
       status: 'Success',
       message: 'User fetched successfully',
       data: currentUser,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+export const retrieveQuestions = async (req, res) => {
+  try {
+    const questions = await getQuestions(req.batch);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Questions fetched successfully',
+      data: questions,
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });

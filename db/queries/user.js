@@ -30,3 +30,8 @@ export const getUserById = `
     select * from user_table
     where user_id = $1;
 `;
+
+export const selectQuestionsByBatchId = `
+    select * from assessment_questions
+    where batch_id = $1;
+`;

@@ -15,7 +15,7 @@ const authenticate = (req, res, next) => {
         .status(401)
         .json({ status: 'Fail', message: 'You need to be signed in' });
     }
-    req.user = data;
+    req.entrant = data;
     return next();
   } catch (error) {
     return res

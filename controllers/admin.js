@@ -63,7 +63,7 @@ export const sendNewApplication = async (req, res) => {
 
 export const populateQuestions = async (req, res) => {
   try {
-    const adminId = req.user.id;
+    const adminId = req.entrant.id;
     const table = await addQuestions(adminId, req.body.arr);
     return res.status(200).json({
       status: 'Success',

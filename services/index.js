@@ -1,6 +1,6 @@
 import {
   getSingleUserByEmail, addNewUser,
-  newApplication,
+  newApplication, getQuestions, getSingleUserById,
 } from './user';
 import {
   getSingleAdminByEmail, setNewApplication, checkBatchId, addQuestions,
@@ -14,4 +14,6 @@ export {
   setNewApplication,
   checkBatchId,
   addQuestions,
+  getQuestions,
+  getSingleUserById,
 };
