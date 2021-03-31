@@ -86,6 +86,11 @@ export const updateTheAdmin = async (req, res) => {
     return res.status(200).json({
       status: 'Success',
       message: 'Details updated successfully',
+      deets: {
+        image: body.photo,
+        adminName: body.fullName,
+        adminEmail: body.email,
+      },
     });
   } catch (error) {
     return res.status(500).json({
