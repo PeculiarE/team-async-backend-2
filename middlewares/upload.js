@@ -1,4 +1,4 @@
-import { cloudinaryConfig, cloudinaryConfigAd } from '../utils';
+import { cloudinaryConfig, cloudinaryConfigAd, cloudinaryConfigUpdate } from '../utils';
 
 export const cloudinaryUpload = async (req, res, next) => {
   try {
@@ -15,6 +15,16 @@ export const cloudinaryUploadTwo = async (req, res, next) => {
   try {
     const data = await cloudinaryConfigAd(req.files.design.tempFilePath);
     req.body.design = data[0].secure_url;
+    next();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cloudinaryUploadThree = async (req, res, next) => {
+  try {
+    const data = await cloudinaryConfigUpdate(req.files.photo.tempFilePath);
+    req.body.photo = data[0].secure_url;
     next();
   } catch (error) {
     console.log(error);

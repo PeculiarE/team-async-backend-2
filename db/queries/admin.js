@@ -42,14 +42,23 @@ export const insertQuestions = `insert into assessment_questions (
     option_d,
     ans,
     total_questions,
-    total_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-    returning *;
+    total_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
 `;
 
 export const insertAssessmentDetails = `insert into assessment_details (
     batch_id,
     date_of_expiration,
     total_questions,
-    total_time) values ($1, $2, $3, $4)
-    returning *;
+    total_time) values ($1, $2, $3, $4);
 `;
+
+export const updateAdmin = `
+    UPDATE admin_table
+    SET
+    full_name = $1,
+    email = $2,
+    phone = $3,
+    address = $4,
+    country = $5,
+    photo_url = $6,
+    updated_at = NOW() WHERE admin_id = $7;`;

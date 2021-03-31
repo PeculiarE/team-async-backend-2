@@ -1,7 +1,7 @@
 import db from '../db/setup';
 import {
   getAdminByEmail, insertNewApplication, getBatchId, getCurrentBatch, insertQuestions,
-  insertAssessmentDetails, fetchAllUsers, updateUserStatusbyEmail,
+  insertAssessmentDetails, fetchAllUsers, updateUserStatusbyEmail, updateAdmin,
 } from '../db/queries/admin';
 
 export const getSingleAdminByEmail = async (email) => db.oneOrNone(getAdminByEmail, [email]);
@@ -28,7 +28,7 @@ export const addQuestions = async (adminId, data) => {
     const {
       questionId, question, optionA, optionB, optionC, optionD, ans,
     } = el;
-    return db.one(insertQuestions, [
+    return db.none(insertQuestions, [
       questionId,
       batchId.max,
       adminId,
@@ -42,7 +42,7 @@ export const addQuestions = async (adminId, data) => {
       extraDetails[0],
     ]);
   });
-  return db.one(insertAssessmentDetails, [
+  return db.none(insertAssessmentDetails, [
     batchId.max,
     extraDetails[1],
     totalQuestions,
@@ -50,7 +50,22 @@ export const addQuestions = async (adminId, data) => {
   ]);
 };
 
+
 export const updateUserbyAdmin = async (data, email) => {
   const { applicationStatus } = data;
   return db.oneOrNone(updateUserStatusbyEmail, [applicationStatus, email]);
+};
+  
+export const updateAdminDetails = async (adminId, data) => {
+  const {
+    fullName, email, phone, address, country, photo,
+  } = data;
+  db.none(updateAdmin, [
+    fullName,
+    email,
+    phone,
+    address,
+    country,
+    photo,
+    adminId]);
 };
