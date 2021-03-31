@@ -1,5 +1,7 @@
 import { signUpSchema, loginSchema, applicationSchema } from '../validation';
-import { getSingleUserByEmail, getSingleUserById } from '../services';
+import {
+  getSingleUserByEmail, checkCurrentBatchUser, getSingleUserById,
+} from '../services';
 
 export const validateNewUserData = (req, res, next) => {
   try {
@@ -19,16 +21,20 @@ export const validateNewUserData = (req, res, next) => {
   }
 };
 
-export const checkIfUserAlreadyExists = async (req, res, next) => {
+export const checkIfUserAlreadyExistsForCurrentBatch = async (req, res, next) => {
   try {
     const user = await getSingleUserByEmail(req.body.email);
     if (!user) {
       return next();
     }
-    return res.status(409).json({
-      status: 'Fail',
-      message: 'This email already exists!',
-    });
+    const batchId = await checkCurrentBatchUser();
+    if (user.batch_id === batchId) {
+      return res.status(409).json({
+        status: 'Fail',
+        message: 'User already exists!',
+      });
+    }
+    return next();
   } catch (error) {
     return res.status(500).json({
       status: 'Fail',

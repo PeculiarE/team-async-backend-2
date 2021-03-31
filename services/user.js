@@ -1,21 +1,25 @@
 import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
-  getUserByEmail, insertNewUser, updateUser, getUserById, selectQuestionsByBatchId,
+  getUserByEmail,
+  insertNewUser, updateUser, getUserById, selectQuestionsByBatchId, getCurrentBatchUser,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.oneOrNone(getUserByEmail, [email]);
 
+export const checkCurrentBatchUser = async () => db.one(getCurrentBatchUser);
+
 export const addNewUser = async (data) => {
-  const id = generateUUID();
+  const userId = generateUUID();
+  const batchId = await checkCurrentBatchUser();
   const {
     email, fullName, password, phone,
   } = data;
-  return db.none(insertNewUser, [id, fullName, email, phone, password]);
+  return db.none(insertNewUser, [userId, batchId, fullName, email, phone, password]);
 };
 
 export const newApplication = async (userId, data) => {
-  const batchId = generateUUID();
+  const applicationStatus = 'Yes';
   const {
     email, dob, age, address, university, course, cgpa, cv, photo,
   } = data;
@@ -29,7 +33,7 @@ export const newApplication = async (userId, data) => {
     cgpa,
     cv,
     photo,
-    batchId,
+    applicationStatus,
     userId]);
 };
 

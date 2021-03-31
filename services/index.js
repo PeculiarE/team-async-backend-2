@@ -1,5 +1,5 @@
 import {
-  getSingleUserByEmail, addNewUser,
+  getSingleUserByEmail, checkCurrentBatchUser, addNewUser,
   newApplication, getQuestions, getSingleUserById,
 } from './user';
 import {
@@ -8,6 +8,7 @@ import {
 
 export {
   getSingleUserByEmail,
+  checkCurrentBatchUser,
   addNewUser,
   getSingleAdminByEmail,
   newApplication,

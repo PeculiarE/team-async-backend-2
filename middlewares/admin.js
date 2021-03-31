@@ -45,7 +45,7 @@ export const checkIfBatchAlreadyExists = async (req, res, next) => {
     }
     return res.status(409).json({
       status: 'Fail',
-      message: 'This batch already exists!',
+      message: 'Batch already exists!',
     });
   } catch (error) {
     return res.status(500).json({

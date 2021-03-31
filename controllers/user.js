@@ -1,5 +1,6 @@
 import {
-  addNewUser, getSingleUserByEmail, newApplication, getSingleUserById, getQuestions,
+  addNewUser, getSingleUserByEmail,
+  checkCurrentBatchUser, newApplication, getSingleUserById, getQuestions,
 } from '../services';
 
 import { hashPassword, comparePassword, convertDataToToken } from '../utils';
@@ -27,8 +28,9 @@ export const registerNewUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const batchId = await checkCurrentBatchUser();
     const user = await getSingleUserByEmail(email);
-    if (user && comparePassword(password, user.password)) {
+    if (user && (user.batch_id === batchId) && comparePassword(password, user.password)) {
       const token = convertDataToToken({ email, id: user.user_id });
       return res.status(201).json({
         status: 'Success',
