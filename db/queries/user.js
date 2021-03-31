@@ -36,7 +36,16 @@ export const getUserById = `
     where user_id = $1;
 `;
 
+export const updateUserPasswordById = `
+update user_table
+set 
+  password = $1,
+  updated_at = NOW()
+where email = $2
+returning *;`;
+
 export const selectQuestionsByBatchId = `
     select * from assessment_questions
     where batch_id = $1;
 `;
+

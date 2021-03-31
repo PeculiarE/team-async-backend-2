@@ -1,5 +1,5 @@
 import {
-  getSingleAdminByEmail, setNewApplication, addQuestions, updateAdminDetails,
+  getSingleAdminByEmail, setNewApplication, addQuestions, updateUserbyAdmin, getAllUsers, updateAdminDetails,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -97,5 +97,32 @@ export const updateTheAdmin = async (req, res) => {
       status: 'Fail',
       message: 'Something went wrong',
     });
+  }
+};
+
+export const updateUserApplicationStatus = async (req, res) => {
+  try {
+    const { email } = req.params;
+    // const userToBeUpdated = await getUserByEmail(email)
+    const userToBeUpdated = await updateUserbyAdmin(req.body, email);
+    res
+      .status(201)
+      .json({ status: 'success', message: 'User updated successfully.', data: userToBeUpdated });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+export const returnAllUsers = async (req, res) => {
+  try {
+    const allUsers = await getAllUsers();
+    res.status(200).json({
+      status: 'Success',
+      message: 'Users fetched successfully',
+      data: allUsers,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
   }
 };

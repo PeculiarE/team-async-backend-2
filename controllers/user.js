@@ -1,9 +1,15 @@
+/* eslint-disable no-console */
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import {
-  addNewUser, getSingleUserByEmail,
-  checkCurrentBatchUser, newApplication, getSingleUserById, getQuestions,
+  addNewUser, getSingleUserByEmail, newApplication, updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
 } from '../services';
 
-import { hashPassword, comparePassword, convertDataToToken } from '../utils';
+import {
+  hashPassword, comparePassword, convertDataToToken, verifyToken,
+} from '../utils';
+
+dotenv.config();
 
 export const registerNewUser = async (req, res) => {
   try {
@@ -107,6 +113,74 @@ export const returnSingleUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
   }
+};
+
+export const resetPassword = async (req, res) => {
+  const password = process.env.PASSWORD;
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'abidemirolake@gmail.com',
+      pass: password,
+    },
+  });
+  try {
+    const { email } = req.body;
+    console.log(req.body);
+    const userer = await getSingleUserByEmail(email);
+    console.log(userer);
+    const userToken = convertDataToToken({
+      email,
+      id: userer.id,
+    });
+    const mailOptions = await transporter.sendMail({
+      from: '"Password Ninja" <abidemirolake@gmail.com>',
+      to: email,
+      subject: 'Reset Password',
+      text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
+      html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
+    });
+    res.status(200).json({
+      status: 'success',
+      message: 'password reset link sent successfully.',
+    });
+    console.log('Message sent: %s', mailOptions.messageId);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      message: 'Something went wrong ',
+    });
+  }
+};
+
+// eslint-disable-next-line consistent-return
+export const updatePassword = async (req, res) => {
+  try {
+    const { err, data } = verifyToken(req.params.token);
+    console.log(req.body);
+    console.log(req.params.token);
+    if (err) {
+      console.log(err);
+      return res
+        .status(401)
+        .json({ status: 'fail', message: 'Invalid token' });
+    }
+    const userss = data;
+    const hashedPassword = hashPassword(req.body.password);
+    const updatedUser = await updateUserPassword(
+      { ...req.body, password: hashedPassword }, userss.email,
+    );
+    console.log(userss.email);
+    res
+      .status(201)
+      .json({ status: 'success', message: 'Password updated successfully.', data: updatedUser });
+  } catch (error) {
+    console.log(error);
+    console.log(req.params);
+      }
 };
 
 export const retrieveQuestions = async (req, res) => {

@@ -2,6 +2,17 @@ export const getAdminByEmail = `
     select * from admin_table
     where email = $1;
 `;
+export const fetchAllUsers = `
+ select * from user_table
+ ;`;
+
+export const updateUserStatusbyEmail = `
+ update user_table
+ set
+ application_status = $1,
+ updated_at = now()
+ where email = $2
+ returning *;`;
 
 export const insertNewApplication = `insert into application_info (
     batch_id,
