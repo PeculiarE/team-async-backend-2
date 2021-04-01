@@ -2,8 +2,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import {
-  addNewUser, getSingleUserByEmail, newApplication, updateUserPassword,
-  checkCurrentBatchUser, getSingleUserById, getQuestions,
+  addNewUser, getSingleUserByEmail, newApplication,
+  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
 } from '../services';
 
 import {
@@ -87,17 +87,18 @@ export const createApplication = async (req, res) => {
   const { body } = req;
   const user = req.user.user_id;
   try {
-    const applicantDeets = await newApplication(user, body);
-    console.log(applicantDeets);
+    const time = await newApplication(user, body);
+    console.log(time);
     res.status(201).json({
       status: 'success',
       message: 'Application successful.',
-      data: applicantDeets,
+      body,
+      updatedTime: time.updated_at,
     });
   } catch (error) {
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wronger.',
+      message: 'Something went wrong.',
     });
   }
 };

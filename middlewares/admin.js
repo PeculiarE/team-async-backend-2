@@ -1,5 +1,5 @@
 import { loginAdminSchema, applicationAdminSchema, updateAdminSchema } from '../validation';
-import { checkBatchId, getSingleAdminByEmail } from '../services';
+import { checkBatchId, getSingleAdminByEmail, getSingleQuestion } from '../services';
 
 export const validateAdminLoginData = (req, res, next) => {
   try {
@@ -82,6 +82,26 @@ export const getAdminProfile = async (req, res, next) => {
     return res.status(400).json({
       status: 'Fail',
       message: 'You need to signup or login.',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong.',
+    });
+  }
+};
+
+export const validateQuestion = async (req, res, next) => {
+  try {
+    const { question } = req.body;
+    const questionType = await getSingleQuestion(question);
+    console.log(questionType);
+    if (!question) {
+      next();
+    }
+    return res.status(409).json({
+      status: 'Fail',
+      message: 'Question already exists!',
     });
   } catch (error) {
     return res.status(500).json({

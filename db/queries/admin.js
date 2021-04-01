@@ -62,3 +62,15 @@ export const updateAdmin = `
     country = $5,
     photo_url = $6,
     updated_at = NOW() WHERE admin_id = $7;`;
+
+export const insertAssessmentQuestions = `
+insert into questions_table (
+    question_id,
+    question,
+    option_a,
+    option_b,
+    option_c,
+    option_d,
+    correct_option) values ($1, $2, $3, $4, $5, $6, $7);`;
+
+export const getOneQuestion = 'select question from questions_table where question = $1;';

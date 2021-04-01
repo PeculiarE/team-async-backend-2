@@ -1,8 +1,8 @@
 import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
-  getUserByEmail, insertNewUser, updateUser,
-  getUserById, updateUserPasswordById, selectQuestionsByBatchId, getCurrentBatchUser,
+  getUserByEmail, insertNewUser, updateUser, getUserById,
+  updateUserPasswordById, selectQuestionsByBatchId, getCurrentBatchUser,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.manyOrNone(getUserByEmail, [email]);
@@ -23,7 +23,7 @@ export const newApplication = async (userId, data) => {
   const {
     email, dob, age, address, university, course, cgpa, cv, photo,
   } = data;
-  db.none(updateUser, [
+  return db.one(updateUser, [
     email,
     dob,
     age,

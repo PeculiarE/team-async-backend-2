@@ -8,7 +8,7 @@ import {
   getAllUsers,
   updateUserbyAdmin,
   setNewApplication, checkBatchId, addQuestions,
- updateAdminDetails,
+  updateAdminDetails, getSingleQuestion, recordQuestion,
 } from './admin';
 
 export {
@@ -19,9 +19,11 @@ export {
   newApplication,
   setNewApplication,
   checkBatchId,
+  recordQuestion,
   addQuestions,
   updateUserPassword,
   getAllUsers,
+  getSingleQuestion,
   updateUserbyAdmin,
   getQuestions,
   getSingleUserById,

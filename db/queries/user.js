@@ -15,7 +15,8 @@ export const updateUser = `
     cv_url = $8,
     photo_url = $9,
     application_status = $10,
-    updated_at = NOW() WHERE user_id = $11;`;
+    updated_at = NOW() WHERE user_id = $11
+    returning *`;
 
 export const insertNewUser = `insert into user_table (
     user_id,
@@ -48,4 +49,3 @@ export const selectQuestionsByBatchId = `
     select * from assessment_questions
     where batch_id = $1;
 `;
-
