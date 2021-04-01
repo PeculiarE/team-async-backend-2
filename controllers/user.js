@@ -87,11 +87,13 @@ export const createApplication = async (req, res) => {
   const { body } = req;
   const user = req.user.user_id;
   try {
-    await newApplication(user, body);
+    const time = await newApplication(user, body);
+    console.log(time);
     res.status(201).json({
       status: 'success',
       message: 'Application successful.',
       body,
+      updatedTime: time.updated_at,
     });
   } catch (error) {
     res.status(500).json({
