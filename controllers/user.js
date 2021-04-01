@@ -2,7 +2,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import {
-  addNewUser, getSingleUserByEmail, newApplication, updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
+  addNewUser, getSingleUserByEmail, newApplication, updateUserPassword,
+  checkCurrentBatchUser, getSingleUserById, getQuestions,
 } from '../services';
 
 import {
@@ -116,7 +117,7 @@ export const returnSingleUser = async (req, res) => {
 };
 
 export const resetPassword = async (req, res) => {
-  const password = process.env.PASSWORD;
+  const password = 'abidemi22';
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
@@ -180,7 +181,7 @@ export const updatePassword = async (req, res) => {
   } catch (error) {
     console.log(error);
     console.log(req.params);
-      }
+  }
 };
 
 export const retrieveQuestions = async (req, res) => {

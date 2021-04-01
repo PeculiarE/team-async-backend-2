@@ -1,5 +1,6 @@
 import {
-  getSingleAdminByEmail, setNewApplication, addQuestions, updateUserbyAdmin, getAllUsers, updateAdminDetails,
+  getSingleAdminByEmail, setNewApplication, addQuestions,
+  updateUserbyAdmin, getAllUsers, updateAdminDetails,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -103,7 +104,6 @@ export const updateTheAdmin = async (req, res) => {
 export const updateUserApplicationStatus = async (req, res) => {
   try {
     const { email } = req.params;
-    // const userToBeUpdated = await getUserByEmail(email)
     const userToBeUpdated = await updateUserbyAdmin(req.body, email);
     res
       .status(201)
