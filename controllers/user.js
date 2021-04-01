@@ -98,7 +98,7 @@ export const createApplication = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wronger.',
+      message: 'Something went wrong.',
     });
   }
 };

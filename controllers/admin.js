@@ -1,6 +1,6 @@
 import {
-  getSingleAdminByEmail, setNewApplication,
-  addQuestions, updateUserbyAdmin, getAllUsers, updateAdminDetails,
+  getSingleAdminByEmail, setNewApplication, addQuestions,
+  updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -131,5 +131,20 @@ export const returnAllUsers = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+export const postQuestions = async (req, res) => {
+  try {
+    await recordQuestion(req.body);
+    res.status(201).json({
+      status: 'success',
+      message: 'Question recorded successfully.',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'Something went wrong here.',
+    });
   }
 };
