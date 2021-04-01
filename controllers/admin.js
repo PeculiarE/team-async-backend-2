@@ -92,6 +92,12 @@ export const updateTheAdmin = async (req, res) => {
         adminName: body.fullName,
         adminEmail: body.email,
       },
+      extraDeets: {
+        adminFullName: body.name,
+        adminPhone: body.phone,
+        adminAddress: body.address,
+        adminCountry: body.country,
+      },
     });
   } catch (error) {
     return res.status(500).json({
