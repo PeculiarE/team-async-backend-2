@@ -49,13 +49,10 @@ export const addQuestions = async (adminId, data) => {
     extraDetails[0],
   ]);
 };
-
-
 export const updateUserbyAdmin = async (data, email) => {
   const { applicationStatus } = data;
   return db.oneOrNone(updateUserStatusbyEmail, [applicationStatus, email]);
 };
-  
 export const updateAdminDetails = async (adminId, data) => {
   const {
     fullName, email, phone, address, country, photo,

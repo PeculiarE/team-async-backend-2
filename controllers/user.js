@@ -2,7 +2,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import {
-  addNewUser, getSingleUserByEmail, newApplication, updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
+  addNewUser, getSingleUserByEmail, newApplication,
+  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
 } from '../services';
 
 import {
@@ -86,12 +87,11 @@ export const createApplication = async (req, res) => {
   const { body } = req;
   const user = req.user.user_id;
   try {
-    const applicantDeets = await newApplication(user, body);
-    console.log(applicantDeets);
+    await newApplication(user, body);
     res.status(201).json({
       status: 'success',
       message: 'Application successful.',
-      data: applicantDeets,
+      body,
     });
   } catch (error) {
     res.status(500).json({
@@ -180,7 +180,7 @@ export const updatePassword = async (req, res) => {
   } catch (error) {
     console.log(error);
     console.log(req.params);
-      }
+  }
 };
 
 export const retrieveQuestions = async (req, res) => {

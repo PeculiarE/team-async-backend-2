@@ -1,5 +1,6 @@
 import {
-  getSingleAdminByEmail, setNewApplication, addQuestions, updateUserbyAdmin, getAllUsers, updateAdminDetails,
+  getSingleAdminByEmail, setNewApplication,
+  addQuestions, updateUserbyAdmin, getAllUsers, updateAdminDetails,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -90,6 +91,12 @@ export const updateTheAdmin = async (req, res) => {
         image: body.photo,
         adminName: body.fullName,
         adminEmail: body.email,
+      },
+      extraDeets: {
+        adminFullName: body.name,
+        adminPhone: body.phone,
+        adminAddress: body.address,
+        adminCountry: body.country,
       },
     });
   } catch (error) {
