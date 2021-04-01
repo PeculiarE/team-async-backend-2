@@ -7,24 +7,25 @@ import {
 import {
   validateAdminLoginData, validateAdminApplication,
   checkIfBatchAlreadyExists, validateAdminUpdateData,
-  getAdminProfile,
+  getAdminProfile, validateQuestion,
 } from './admin';
 import authenticate from './auth';
 
 export {
   validateNewUserData,
-  checkIfUserAlreadyExistsForCurrentBatch,
   validateLoginData,
+  authenticate,
+  checkIfUserAlreadyExistsForCurrentBatch,
   validateAdminLoginData,
   validateAdminApplication,
-  authenticate,
   cloudinaryUpload,
   cloudinaryUploadTwo,
   validateApplication,
-  getUserProfile,
   checkIfBatchAlreadyExists,
+  getUserProfile,
   getUserBatch,
   validateAdminUpdateData,
   cloudinaryUploadThree,
+  validateQuestion,
   getAdminProfile,
 };

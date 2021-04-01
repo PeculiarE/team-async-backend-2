@@ -48,4 +48,3 @@ export const selectQuestionsByBatchId = `
     select * from assessment_questions
     where batch_id = $1;
 `;
-

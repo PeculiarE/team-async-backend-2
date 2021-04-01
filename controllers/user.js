@@ -2,7 +2,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import {
-  addNewUser, getSingleUserByEmail, newApplication, updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
+  addNewUser, getSingleUserByEmail, newApplication,
+  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
 } from '../services';
 
 import {
@@ -96,7 +97,7 @@ export const createApplication = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wronger.',
+      message: 'Something went wrong.',
     });
   }
 };
@@ -180,7 +181,7 @@ export const updatePassword = async (req, res) => {
   } catch (error) {
     console.log(error);
     console.log(req.params);
-      }
+  }
 };
 
 export const retrieveQuestions = async (req, res) => {
