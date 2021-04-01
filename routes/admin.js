@@ -23,7 +23,7 @@ adminRouter.post('/adminapplication', authenticate, cloudinaryUploadTwo, validat
 adminRouter.post('/adminquestions', authenticate, populateQuestions);
 
 adminRouter.put('/updateuserstatus/:email', authVerified, updateUserApplicationStatus);
-adminRouter.get('/admin/allusers', authenticate, authVerified, returnAllUsers);
+adminRouter.get('/admin/allusers', authenticate, returnAllUsers);
 adminRouter.post('/adminupdate', authenticate, cloudinaryUploadThree, validateAdminUpdateData, getAdminProfile, updateTheAdmin);
 adminRouter.post('/question', authenticate, postQuestions);
 
