@@ -1,6 +1,6 @@
 import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
-  updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion,
+  updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion, updateUserApprovalStatus,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -110,6 +110,7 @@ export const updateTheAdmin = async (req, res) => {
 export const updateUserApplicationStatus = async (req, res) => {
   try {
     const { email } = req.params;
+    // const userToBeUpdated = await getUserByEmail(email)
     const userToBeUpdated = await updateUserbyAdmin(req.body, email);
     res
       .status(201)
@@ -143,6 +144,22 @@ export const postQuestions = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: 'fail',
+      message: 'Something went wrong here.',
+    });
+  }
+};
+
+export const updateTheUserApprovalStatus = async (req, res) => {
+  try {
+    const { userId, newStatus } = req.body;
+    await updateUserApprovalStatus(userId, newStatus);
+    res.status(201).json({
+      status: 'Success',
+      message: 'Approval status updated successfully.',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'Fail',
       message: 'Something went wrong here.',
     });
   }
