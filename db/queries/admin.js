@@ -79,3 +79,10 @@ export const updateApprovalStatus = `
 UPDATE user_table
 SET
 approval_status = $2 WHERE user_id = $1;`;
+
+export const getAllApplicantsByBatchId = `
+SELECT batch_id, COUNT (*)
+FROM
+user_table
+GROUP BY
+batch_id;`;
