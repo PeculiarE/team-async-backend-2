@@ -6,12 +6,12 @@ import {
 
 import {
   createApplication, registerNewUser, loginUser, returnSingleUser, retrieveQuestions,
-  resetPassword, updatePassword,
+  resetPassword, updatePassword, getAllQuestions,
 } from './user';
 
 export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
   populateQuestions, returnSingleUser, resetPassword, updatePassword,
   updateUserApplicationStatus, postQuestions, returnAllUsers,
-  retrieveQuestions, updateTheAdmin, updateTheUserApprovalStatus, retrieveEntriesSummary,
+  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus, retrieveEntriesSummary,
 };

@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import {
   addNewUser, getSingleUserByEmail, newApplication,
-  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
+  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions, getQuestionsInDb,
 } from '../services';
 
 import {
@@ -118,14 +118,14 @@ export const returnSingleUser = async (req, res) => {
 };
 
 export const resetPassword = async (req, res) => {
-  const password = process.env.PASSWORD;
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
+    service: 'gmail',
     port: 587,
     secure: false,
     auth: {
-      user: 'abidemirolake@gmail.com',
-      pass: password,
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.PASS_WORD,
     },
   });
   try {
@@ -153,7 +153,7 @@ export const resetPassword = async (req, res) => {
     console.log(error);
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wrong ',
+      message: 'Something went wrong',
     });
   }
 };
@@ -195,5 +195,19 @@ export const retrieveQuestions = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+export const getAllQuestions = async (req, res) => {
+  try {
+    console.log(req.batch);
+    const questions = await getQuestionsInDb(req.batch);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Questions fetched successfully',
+      data: questions,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Something went wronger.' });
   }
 };
