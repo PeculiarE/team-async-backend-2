@@ -1,6 +1,7 @@
 import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
   updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion, updateUserApprovalStatus,
+  getEntriesSummary,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -156,6 +157,22 @@ export const updateTheUserApprovalStatus = async (req, res) => {
     res.status(201).json({
       status: 'Success',
       message: 'Approval status updated successfully.',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong here.',
+    });
+  }
+};
+
+export const retrieveEntriesSummary = async (req, res) => {
+  try {
+    const summary = await getEntriesSummary();
+    res.status(201).json({
+      status: 'Success',
+      message: 'Summary fetched successfully.',
+      data: summary,
     });
   } catch (error) {
     res.status(500).json({

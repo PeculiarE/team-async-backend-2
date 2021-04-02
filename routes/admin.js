@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   loginAdmin,
   authVerified, sendNewApplication, populateQuestions, postQuestions, updateUserApplicationStatus,
-  returnAllUsers, updateTheAdmin, updateTheUserApprovalStatus,
+  returnAllUsers, updateTheAdmin, updateTheUserApprovalStatus, retrieveEntriesSummary,
 } from '../controllers';
 import {
   validateAdminLoginData,
@@ -25,7 +25,7 @@ adminRouter.put('/updateuserstatus/:email', authVerified, updateUserApplicationS
 adminRouter.get('/admin/allusers', authenticate, returnAllUsers);
 adminRouter.post('/adminupdate', authenticate, cloudinaryUploadThree, validateAdminUpdateData, getAdminProfile, updateTheAdmin);
 adminRouter.post('/question', authenticate, postQuestions);
-
 adminRouter.post('/update', authenticate, updateTheUserApprovalStatus);
+adminRouter.get('/summary', authenticate, retrieveEntriesSummary);
 
 export default adminRouter;
