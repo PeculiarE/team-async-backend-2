@@ -71,6 +71,7 @@ insert into questions_table (
     option_b,
     option_c,
     option_d,
-    correct_option) values ($1, $2, $3, $4, $5, $6, $7);`;
+    correct_option,
+    batch_id) values ($1, $2, $3, $4, $5, $6, $7, $8);`;
 
 export const getOneQuestion = 'select question from questions_table where question = $1;';

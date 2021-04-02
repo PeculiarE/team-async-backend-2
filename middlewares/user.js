@@ -113,7 +113,9 @@ export const getUserProfile = async (req, res, next) => {
 export const getUserBatch = async (req, res, next) => {
   try {
     const userId = req.entrant.id;
+    console.log(userId);
     const user = await getSingleUserById(userId);
+    console.log(user);
     if (user) {
       req.batch = user.batch_id;
       return next();
@@ -125,7 +127,7 @@ export const getUserBatch = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       status: 'Fail',
-      message: 'Something went wrong.',
+      message: 'Something went wrongy.',
     });
   }
 };
