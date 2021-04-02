@@ -22,8 +22,8 @@ export const checkBatchId = async (batchId) => db.oneOrNone(getBatchId, [batchId
 
 const checkCurrentBatch = async () => db.one(getCurrentBatch);
 
-export const recordQuestion = async (adminId, data) => {
-  // const batchId = await checkCurrentBatch();
+export const recordQuestion = async (data) => {
+  const batchId = await checkCurrentBatch();
   const {
     question,
     optionA,
@@ -41,6 +41,7 @@ export const recordQuestion = async (adminId, data) => {
     optionC,
     optionD,
     correctOption,
+    batchId.max,
   ]);
 };
 

@@ -49,3 +49,8 @@ export const selectQuestionsByBatchId = `
     select * from assessment_questions
     where batch_id = $1;
 `;
+
+export const selectAllQuestionsInBatch = `
+    select * from questions_table
+    where batch_id = $1;
+    `;

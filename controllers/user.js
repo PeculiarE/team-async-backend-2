@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import {
   addNewUser, getSingleUserByEmail, newApplication,
-  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions,
+  updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions, getQuestionsInDb,
 } from '../services';
 
 import {
@@ -195,5 +195,19 @@ export const retrieveQuestions = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+export const getAllQuestions = async (req, res) => {
+  try {
+    console.log(req.batch);
+    const questions = await getQuestionsInDb(req.batch);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Questions fetched successfully',
+      data: questions,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Something went wronger.' });
   }
 };

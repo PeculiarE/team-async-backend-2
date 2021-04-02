@@ -1,7 +1,7 @@
 import {
   getSingleUserByEmail, addNewUser,
   newApplication, updateUserPassword, checkCurrentBatchUser,
-  getQuestions, getSingleUserById,
+  getQuestions, getSingleUserById, getQuestionsInDb,
 } from './user';
 import {
   getSingleAdminByEmail,
@@ -29,6 +29,7 @@ export {
   getQuestions,
   getSingleUserById,
   updateAdminDetails,
+  getQuestionsInDb,
   updateUserApprovalStatus,
   getEntriesSummary,
 };
