@@ -87,4 +87,3 @@ FROM
 user_table
 GROUP BY
 batch_id;`;
-
