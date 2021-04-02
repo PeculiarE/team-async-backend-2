@@ -118,7 +118,7 @@ export const returnSingleUser = async (req, res) => {
 };
 
 export const resetPassword = async (req, res) => {
-  const password = process.env.PASSWORD;
+  const password = 'abidemi22';
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,

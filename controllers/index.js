@@ -1,7 +1,7 @@
 import {
   loginAdmin, authVerified, sendNewApplication, populateQuestions,
   updateUserApplicationStatus, updateTheAdmin,
-  returnAllUsers, postQuestions,
+  returnAllUsers, postQuestions, updateTheUserApprovalStatus, retrieveEntriesSummary,
 } from './admin';
 
 import {
@@ -13,5 +13,5 @@ export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
   populateQuestions, returnSingleUser, resetPassword, updatePassword,
   updateUserApplicationStatus, postQuestions, returnAllUsers,
-  retrieveQuestions, updateTheAdmin, getAllQuestions,
+  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus, retrieveEntriesSummary,
 };

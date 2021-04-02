@@ -75,3 +75,15 @@ insert into questions_table (
     batch_id) values ($1, $2, $3, $4, $5, $6, $7, $8);`;
 
 export const getOneQuestion = 'select question from questions_table where question = $1;';
+
+export const updateApprovalStatus = `
+UPDATE user_table
+SET
+approval_status = $2 WHERE user_id = $1;`;
+
+export const getAllApplicantsByBatchId = `
+SELECT batch_id, COUNT (*)
+FROM
+user_table
+GROUP BY
+batch_id;`;
