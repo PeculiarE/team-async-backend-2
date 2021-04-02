@@ -62,3 +62,12 @@ export const updateAdmin = `
     country = $5,
     photo_url = $6,
     updated_at = NOW() WHERE admin_id = $7;`;
+
+export const fetchAllThatApplied = `
+select fullname,
+email,
+concat(dob, ' ', age) as date_of_birth,
+address,
+university,
+cgpa,
+from user_table;`;

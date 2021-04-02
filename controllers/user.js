@@ -117,14 +117,14 @@ export const returnSingleUser = async (req, res) => {
 };
 
 export const resetPassword = async (req, res) => {
-  const password = 'abidemi22';
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
+    service: 'gmail',
     port: 587,
     secure: false,
     auth: {
-      user: 'abidemirolake@gmail.com',
-      pass: password,
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.PASS_WORD,
     },
   });
   try {
@@ -152,7 +152,7 @@ export const resetPassword = async (req, res) => {
     console.log(error);
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wrong ',
+      message: 'Something went wrong',
     });
   }
 };

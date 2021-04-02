@@ -8,7 +8,7 @@ import {
   getAllUsers,
   updateUserbyAdmin,
   setNewApplication, checkBatchId, addQuestions,
- updateAdminDetails,
+  updateAdminDetails, fetchAllApplicants,
 } from './admin';
 
 export {
@@ -26,4 +26,5 @@ export {
   getQuestions,
   getSingleUserById,
   updateAdminDetails,
+  fetchAllApplicants,
 };
