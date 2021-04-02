@@ -1,6 +1,7 @@
 import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
-  updateUserbyAdmin, getAllUsers, updateAdminDetails,
+  updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion, updateUserApprovalStatus,
+  getEntriesSummary,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -92,6 +93,12 @@ export const updateTheAdmin = async (req, res) => {
         adminName: body.fullName,
         adminEmail: body.email,
       },
+      extraDeets: {
+        adminFullName: body.name,
+        adminPhone: body.phone,
+        adminAddress: body.address,
+        adminCountry: body.country,
+      },
     });
   } catch (error) {
     return res.status(500).json({
@@ -104,6 +111,7 @@ export const updateTheAdmin = async (req, res) => {
 export const updateUserApplicationStatus = async (req, res) => {
   try {
     const { email } = req.params;
+    // const userToBeUpdated = await getUserByEmail(email)
     const userToBeUpdated = await updateUserbyAdmin(req.body, email);
     res
       .status(201)
@@ -124,5 +132,52 @@ export const returnAllUsers = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
+  }
+};
+
+export const postQuestions = async (req, res) => {
+  try {
+    await recordQuestion(req.body);
+    res.status(201).json({
+      status: 'success',
+      message: 'Question recorded successfully.',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'Something went wrong here.',
+    });
+  }
+};
+
+export const updateTheUserApprovalStatus = async (req, res) => {
+  try {
+    const { userId, newStatus } = req.body;
+    await updateUserApprovalStatus(userId, newStatus);
+    res.status(201).json({
+      status: 'Success',
+      message: 'Approval status updated successfully.',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong here.',
+    });
+  }
+};
+
+export const retrieveEntriesSummary = async (req, res) => {
+  try {
+    const summary = await getEntriesSummary();
+    res.status(201).json({
+      status: 'Success',
+      message: 'Summary fetched successfully.',
+      data: summary,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong here.',
+    });
   }
 };

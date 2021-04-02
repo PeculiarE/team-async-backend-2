@@ -1,17 +1,17 @@
 import {
   loginAdmin, authVerified, sendNewApplication, populateQuestions,
   updateUserApplicationStatus, updateTheAdmin,
-  returnAllUsers,
+  returnAllUsers, postQuestions, updateTheUserApprovalStatus, retrieveEntriesSummary,
 } from './admin';
 
 import {
-  createApplication, registerNewUser, loginUser,
-  returnSingleUser, retrieveQuestions, resetPassword, updatePassword,
+  createApplication, registerNewUser, loginUser, returnSingleUser, retrieveQuestions,
+  resetPassword, updatePassword, getAllQuestions,
 } from './user';
 
 export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
   populateQuestions, returnSingleUser, resetPassword, updatePassword,
-  updateUserApplicationStatus, returnAllUsers,
-  retrieveQuestions, updateTheAdmin,
+  updateUserApplicationStatus, postQuestions, returnAllUsers,
+  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus, retrieveEntriesSummary,
 };

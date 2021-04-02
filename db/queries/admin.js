@@ -63,11 +63,28 @@ export const updateAdmin = `
     photo_url = $6,
     updated_at = NOW() WHERE admin_id = $7;`;
 
-export const fetchAllThatApplied = `
-select fullname,
-email,
-concat(dob, ' ', age) as date_of_birth,
-address,
-university,
-cgpa,
-from user_table;`;
+export const insertAssessmentQuestions = `
+insert into questions_table (
+    question_id,
+    question,
+    option_a,
+    option_b,
+    option_c,
+    option_d,
+    correct_option,
+    batch_id) values ($1, $2, $3, $4, $5, $6, $7, $8);`;
+
+export const getOneQuestion = 'select question from questions_table where question = $1;';
+
+export const updateApprovalStatus = `
+UPDATE user_table
+SET
+approval_status = $2 WHERE user_id = $1;`;
+
+export const getAllApplicantsByBatchId = `
+SELECT batch_id, COUNT (*)
+FROM
+user_table
+GROUP BY
+batch_id;`;
+

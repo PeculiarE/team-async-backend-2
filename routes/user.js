@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
-  registerNewUser, loginUser, createApplication, returnSingleUser, resetPassword, updatePassword,
-  retrieveQuestions,
+  registerNewUser, loginUser, createApplication, returnSingleUser,
+  resetPassword, updatePassword, retrieveQuestions, getAllQuestions,
 } from '../controllers';
 import {
   authenticate, validateNewUserData, checkIfUserAlreadyExistsForCurrentBatch, validateLoginData,
@@ -17,5 +17,6 @@ userRouter.get('/user/dashboard/:userid', returnSingleUser);
 userRouter.post('/user/reset', resetPassword);
 userRouter.put('/resetpassword/:token', updatePassword);
 userRouter.get('/user/assessment', authenticate, getUserBatch, retrieveQuestions);
+userRouter.get('/user/assessment_questions', authenticate, getUserBatch, getAllQuestions);
 
 export default userRouter;

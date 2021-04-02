@@ -2,8 +2,9 @@ import db from '../db/setup';
 import {
   getAdminByEmail, insertNewApplication, getBatchId, getCurrentBatch, insertQuestions,
   insertAssessmentDetails, fetchAllUsers, updateUserStatusbyEmail, updateAdmin,
-  fetchAllThatApplied,
+  insertAssessmentQuestions, getOneQuestion, updateApprovalStatus, getAllApplicantsByBatchId,
 } from '../db/queries/admin';
+import { generateUUID } from '../utils';
 
 export const getSingleAdminByEmail = async (email) => db.oneOrNone(getAdminByEmail, [email]);
 export const getAllUsers = async () => db.manyOrNone(fetchAllUsers);
@@ -21,6 +22,30 @@ export const checkBatchId = async (batchId) => db.oneOrNone(getBatchId, [batchId
 
 const checkCurrentBatch = async () => db.one(getCurrentBatch);
 
+export const recordQuestion = async (data) => {
+  const batchId = await checkCurrentBatch();
+  const {
+    question,
+    optionA,
+    optionB,
+    optionC,
+    optionD,
+    correctOption,
+  } = data;
+  const questionId = generateUUID();
+  return db.none(insertAssessmentQuestions, [
+    questionId,
+    question,
+    optionA,
+    optionB,
+    optionC,
+    optionD,
+    correctOption,
+    batchId.max,
+  ]);
+};
+
+export const getSingleQuestion = async (question) => db.oneOrNone(getOneQuestion, [question]);
 export const addQuestions = async (adminId, data) => {
   const batchId = await checkCurrentBatch();
   const totalQuestions = data.shift();
@@ -55,6 +80,7 @@ export const updateUserbyAdmin = async (data, email) => {
   const { applicationStatus } = data;
   return db.oneOrNone(updateUserStatusbyEmail, [applicationStatus, email]);
 };
+
 export const updateAdminDetails = async (adminId, data) => {
   const {
     fullName, email, phone, address, country, photo,
@@ -69,4 +95,8 @@ export const updateAdminDetails = async (adminId, data) => {
     adminId]);
 };
 
-export const fetchAllApplicants = async () => db.manyOrNone(fetchAllThatApplied);
+export const updateUserApprovalStatus = async (userId, data) => (
+  db.none(updateApprovalStatus, [userId, data])
+);
+
+export const getEntriesSummary = async () => db.manyOrNone(getAllApplicantsByBatchId);
