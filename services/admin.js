@@ -2,7 +2,7 @@ import db from '../db/setup';
 import {
   getAdminByEmail, insertNewApplication, getBatchId, getCurrentBatch, insertQuestions,
   insertAssessmentDetails, fetchAllUsers, updateUserStatusbyEmail, updateAdmin,
-  insertAssessmentQuestions, getOneQuestion,
+  insertAssessmentQuestions, getOneQuestion, updateApprovalStatus,
 } from '../db/queries/admin';
 import { generateUUID } from '../utils';
 
@@ -93,3 +93,7 @@ export const updateAdminDetails = async (adminId, data) => {
     photo,
     adminId]);
 };
+
+export const updateUserApprovalStatus = async (userId, data) => (
+  db.none(updateApprovalStatus, [userId, data])
+);
