@@ -13,5 +13,6 @@ export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
   populateQuestions, returnSingleUser, resetPassword, updatePassword,
   updateUserApplicationStatus, postQuestions, returnAllUsers,
-  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus, retrieveEntriesSummary,
+  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus,
+  retrieveEntriesSummary,
 };
