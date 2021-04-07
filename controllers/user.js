@@ -130,9 +130,9 @@ export const resetPassword = async (req, res) => {
   });
   try {
     const { email } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const userer = await getSingleUserByEmail(email);
-    console.log(userer);
+    // console.log(userer);
     const userToken = convertDataToToken({
       email,
       id: userer.id,
@@ -150,10 +150,10 @@ export const resetPassword = async (req, res) => {
     });
     console.log('Message sent: %s', mailOptions.messageId);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wrong',
+      message: 'Something went wrong in controller',
     });
   }
 };
@@ -171,6 +171,7 @@ export const updatePassword = async (req, res) => {
         .json({ status: 'fail', message: 'Invalid token' });
     }
     const userss = data;
+    console.log(userss);
     const hashedPassword = hashPassword(req.body.password);
     const updatedUser = await updateUserPassword(
       { ...req.body, password: hashedPassword }, userss.email,
