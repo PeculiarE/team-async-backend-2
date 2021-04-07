@@ -150,7 +150,7 @@ export const resetPassword = async (req, res) => {
     });
     console.log('Message sent: %s', mailOptions.messageId);
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.status(500).json({
       status: 'fail',
       message: 'Something went wrong in controller',
