@@ -8,6 +8,7 @@ import {
   getUserByEmail, insertNewUser, updateUser, getUserById,
   updateUserPasswordById, selectQuestionsByBatchId,
   getCurrentBatchUser, selectAllQuestionsInBatch, saveScore,
+  updateUserPasswordByEmail,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.manyOrNone(getUserByEmail, [email]);
@@ -46,7 +47,7 @@ export const getSingleUserById = async (userid) => db.oneOrNone(getUserById, [us
 
 export const updateUserPassword = async (data, email) => {
   const { password } = data;
-  return db.one(updateUserPasswordById, [password, email]);
+  return db.one(updateUserPasswordByEmail, [password, email]);
 };
 
 export const getQuestions = async (batchId) => db.many(selectQuestionsByBatchId, [batchId]);

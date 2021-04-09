@@ -37,9 +37,9 @@ export const getUserById = `
     where user_id = $1;
 `;
 
-export const updateUserPasswordById = `
+export const updateUserPasswordByEmail = `
 update user_table
-set 
+set
   password = $1,
   updated_at = NOW()
 where email = $2

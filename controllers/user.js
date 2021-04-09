@@ -120,10 +120,10 @@ export const returnSingleUser = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    // host: 'smtp.gmail.com',
     service: 'gmail',
-    port: 587,
-    secure: false,
+    // port: 587,
+    // secure: false,
     auth: {
       user: process.env.SENDER_EMAIL,
       pass: process.env.PASS_WORD,
@@ -131,30 +131,37 @@ export const resetPassword = async (req, res) => {
   });
   try {
     const { email } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const userer = await getSingleUserByEmail(email);
-    console.log(userer);
+    // console.log(userer);
     const userToken = convertDataToToken({
       email,
       id: userer.id,
     });
     const mailOptions = await transporter.sendMail({
-      from: '"Password Ninja" <abidemirolake@gmail.com>',
+      from: `"Password Ninja" <${process.env.SENDER_EMAIL}>`,
       to: email,
       subject: 'Reset Password',
       text: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
       html: `<a href="http://localhost:8080/resetpassword/${userToken}">Reset password</a>`,
     });
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(info.response);
+      }
+    });
     res.status(200).json({
       status: 'success',
       message: 'password reset link sent successfully.',
     });
-    console.log('Message sent: %s', mailOptions.messageId);
+    // console.log('Message sent: %s', mailOptions.messageId);
   } catch (error) {
     console.log(error);
     res.status(500).json({
       status: 'fail',
-      message: 'Something went wrong',
+      message: 'Something went wrong in controller',
     });
   }
 };
@@ -172,6 +179,7 @@ export const updatePassword = async (req, res) => {
         .json({ status: 'fail', message: 'Invalid token' });
     }
     const userss = data;
+    console.log(userss);
     const hashedPassword = hashPassword(req.body.password);
     const updatedUser = await updateUserPassword(
       { ...req.body, password: hashedPassword }, userss.email,
