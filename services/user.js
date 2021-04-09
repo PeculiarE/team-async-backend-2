@@ -6,7 +6,7 @@ import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
   getUserByEmail, insertNewUser, updateUser, getUserById,
-  updateUserPasswordById, selectQuestionsByBatchId,
+  selectQuestionsByBatchId,
   getCurrentBatchUser, selectAllQuestionsInBatch, saveScore,
   updateUserPasswordByEmail,
 } from '../db/queries/user';
