@@ -1,7 +1,8 @@
+// import { getCurrentBatch } from '../db/queries/admin';
 import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
   updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion, updateUserApprovalStatus,
-  getEntriesSummary,
+  getEntriesSummary, checkCurrentBatch, getUsersInBatch,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -179,5 +180,20 @@ export const retrieveEntriesSummary = async (req, res) => {
       status: 'Fail',
       message: 'Something went wrong here.',
     });
+  }
+};
+
+export const returnUsersByBatch = async (req, res) => {
+  try {
+    const batchId = await checkCurrentBatch();
+    console.log(batchId.max);
+    const users = await getUsersInBatch(batchId.max);
+    res.status(200).json({
+      status: 'Success',
+      message: `Batch ${batchId.max} applicants fetched successfully`,
+      data: users,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

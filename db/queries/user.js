@@ -54,3 +54,11 @@ export const selectAllQuestionsInBatch = `
     select * from questions_table
     where batch_id = $1;
     `;
+
+export const saveScore = `
+update user_table
+set
+    test_score = $1,
+    updated_at = NOW()
+where user_id = $2
+returning test_score;`;

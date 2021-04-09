@@ -87,3 +87,9 @@ FROM
 user_table
 GROUP BY
 batch_id;`;
+
+export const fetchAllApplicantsInBatch = `
+    select full_name, email, dob, age, address, university, cgpa, test_score
+    from user_table
+    where batch_id = $1;
+    `;

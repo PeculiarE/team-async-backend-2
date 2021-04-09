@@ -3,6 +3,7 @@ import {
   getAdminByEmail, insertNewApplication, getBatchId, getCurrentBatch, insertQuestions,
   insertAssessmentDetails, fetchAllUsers, updateUserStatusbyEmail, updateAdmin,
   insertAssessmentQuestions, getOneQuestion, updateApprovalStatus, getAllApplicantsByBatchId,
+  fetchAllApplicantsInBatch,
 } from '../db/queries/admin';
 import { generateUUID } from '../utils';
 
@@ -20,7 +21,7 @@ export const setNewApplication = async (data) => {
 
 export const checkBatchId = async (batchId) => db.oneOrNone(getBatchId, [batchId]);
 
-const checkCurrentBatch = async () => db.one(getCurrentBatch);
+export const checkCurrentBatch = async () => db.one(getCurrentBatch);
 
 export const recordQuestion = async (data) => {
   const batchId = await checkCurrentBatch();
@@ -100,3 +101,6 @@ export const updateUserApprovalStatus = async (userId, data) => (
 );
 
 export const getEntriesSummary = async () => db.manyOrNone(getAllApplicantsByBatchId);
+
+export const getUsersInBatch = async (batchId) => db.manyOrNone(fetchAllApplicantsInBatch,
+  [batchId]);
