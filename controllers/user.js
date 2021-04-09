@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import {
   addNewUser, getSingleUserByEmail, newApplication,
   updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions, getQuestionsInDb,
+  inputTestScore,
 } from '../services';
 
 import {
@@ -217,5 +218,21 @@ export const getAllQuestions = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wronger.' });
+  }
+};
+
+export const saveTestScore = async (req, res) => {
+  try {
+    const applicant = req.user;
+    await inputTestScore(req.body, applicant.user_id);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Test score recorded successfully.',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'Success',
+      message: 'Something went wrongy.',
+    });
   }
 };

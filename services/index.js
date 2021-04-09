@@ -1,7 +1,7 @@
 import {
   getSingleUserByEmail, addNewUser,
   newApplication, updateUserPassword, checkCurrentBatchUser,
-  getQuestions, getSingleUserById, getQuestionsInDb,
+  getQuestions, getSingleUserById, getQuestionsInDb, inputTestScore,
 } from './user';
 import {
   getSingleAdminByEmail,
@@ -9,7 +9,7 @@ import {
   updateUserbyAdmin,
   setNewApplication, checkBatchId, addQuestions,
   updateAdminDetails, getSingleQuestion, recordQuestion,
-  updateUserApprovalStatus, getEntriesSummary,
+  updateUserApprovalStatus, getEntriesSummary, getUsersInBatch, checkCurrentBatch,
 } from './admin';
 
 export {
@@ -32,4 +32,7 @@ export {
   getQuestionsInDb,
   updateUserApprovalStatus,
   getEntriesSummary,
+  inputTestScore,
+  getUsersInBatch,
+  checkCurrentBatch,
 };
