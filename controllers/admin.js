@@ -21,6 +21,9 @@ export const loginAdmin = async (req, res) => {
           image: admin.photo_url,
           adminName: admin.full_name,
           adminEmail: email,
+          adminPhone: admin.phone,
+          adminAddress: admin.address,
+          adminCountry: admin.country,
         },
       });
     }
@@ -93,9 +96,6 @@ export const updateTheAdmin = async (req, res) => {
         image: body.photo,
         adminName: body.fullName,
         adminEmail: body.email,
-      },
-      extraDeets: {
-        adminFullName: body.name,
         adminPhone: body.phone,
         adminAddress: body.address,
         adminCountry: body.country,
