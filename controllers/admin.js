@@ -96,7 +96,6 @@ export const updateTheAdmin = async (req, res) => {
         image: body.photo,
         adminName: body.fullName,
         adminEmail: body.email,
-        adminFullName: body.name,
         adminPhone: body.phone,
         adminAddress: body.address,
         adminCountry: body.country,
