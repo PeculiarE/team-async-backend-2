@@ -23,6 +23,10 @@ export const cloudinaryUploadTwo = async (req, res, next) => {
 
 export const cloudinaryUploadThree = async (req, res, next) => {
   try {
+    if (req.files === null) {
+      next();
+      return;
+    }
     const data = await cloudinaryConfigUpdate(req.files.photo.tempFilePath);
     req.yes = {
       a: req.files,
