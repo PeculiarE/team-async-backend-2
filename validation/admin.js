@@ -19,5 +19,5 @@ export const updateAdminSchema = Joi.object({
   phone: Joi.string().trim().regex(/^[0-9]{7,15}$/).allow(null),
   address: Joi.string().trim().allow(''),
   country: Joi.string().trim(),
-  // photo: Joi.string().allow(null),
+  photo: Joi.string().allow('null'),
 });
