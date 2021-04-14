@@ -23,8 +23,9 @@ export const cloudinaryUploadTwo = async (req, res, next) => {
 
 export const cloudinaryUploadThree = async (req, res, next) => {
   try {
-    console.log(req.files, req.files.photo, req.files.photo.tempFilePath);
     const data = await cloudinaryConfigUpdate(req.files.photo.tempFilePath);
+    console.log(req.files, req.files.photo, req.files.photo.tempFilePath);
+    console.log(data);
     req.body.photo = data[0].secure_url;
     next();
   } catch (error) {
