@@ -99,6 +99,7 @@ export const updateTheAdmin = async (req, res) => {
         adminPhone: body.phone,
         adminAddress: body.address,
         adminCountry: body.country,
+        dr: req.yes,
       },
     });
   } catch (error) {
