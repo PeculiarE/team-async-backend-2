@@ -64,6 +64,7 @@ export const validateAdminUpdateData = (req, res, next) => {
     return res.status(400).json({
       status: 'Fail',
       message: error.message,
+      data: req.yes,
     });
   } catch (error) {
     return res.status(500).json({
@@ -82,6 +83,7 @@ export const getAdminProfile = async (req, res, next) => {
     return res.status(400).json({
       status: 'Fail',
       message: 'You need to signup or login.',
+      data: req.yes,
     });
   } catch (error) {
     return res.status(500).json({
