@@ -16,8 +16,8 @@ export const applicationAdminSchema = Joi.object({
 export const updateAdminSchema = Joi.object({
   fullName: Joi.string().trim().min(5).max(100),
   email: Joi.string().trim().email(),
-  phone: Joi.string().trim().regex(/^[0-9]{7,15}$/).allow(''),
+  phone: Joi.string().trim().regex(/^[0-9]{7,15}$/).allow(null),
   address: Joi.string().trim().allow(''),
   country: Joi.string().trim(),
-  photo: Joi.string().allow(null),
+  // photo: Joi.string().allow(null),
 });
