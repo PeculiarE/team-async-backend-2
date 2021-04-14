@@ -18,6 +18,6 @@ export const updateAdminSchema = Joi.object({
   email: Joi.string().trim().email(),
   phone: Joi.string().trim().regex(/^[0-9]{7,15}$/).allow(''),
   address: Joi.string().trim().allow(''),
-  country: Joi.string().trim().allow(''),
-  photo: Joi.string().allow(''),
+  country: Joi.string().trim(),
+  photo: Joi.string().allow(null),
 });
