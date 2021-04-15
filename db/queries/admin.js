@@ -60,7 +60,8 @@ export const updateAdmin = `
     address = $4,
     country = $5,
     photo_url = $6,
-    updated_at = NOW() WHERE admin_id = $7;`;
+    updated_at = NOW() WHERE admin_id = $7
+    returning *;`;
 
 export const insertAssessmentQuestions = `
 insert into questions_table (
