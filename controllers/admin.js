@@ -84,10 +84,10 @@ export const populateQuestions = async (req, res) => {
     });
   }
 };
+
 export const updateTheAdmin = async (req, res) => {
   try {
-    const { body } = req;
-    const admin = req.admin.admin_id;
+    const { body, admin } = req;
     await updateAdminDetails(admin, body);
     return res.status(200).json({
       status: 'Success',
