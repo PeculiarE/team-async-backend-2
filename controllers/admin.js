@@ -21,6 +21,9 @@ export const loginAdmin = async (req, res) => {
           image: admin.photo_url,
           adminName: admin.full_name,
           adminEmail: email,
+          adminPhone: admin.phone,
+          adminAddress: admin.address,
+          adminCountry: admin.country,
         },
       });
     }
@@ -84,10 +87,10 @@ export const populateQuestions = async (req, res) => {
     });
   }
 };
+
 export const updateTheAdmin = async (req, res) => {
   try {
-    const { body } = req;
-    const admin = req.admin.admin_id;
+    const { body, admin } = req;
     await updateAdminDetails(admin, body);
     return res.status(200).json({
       status: 'Success',
@@ -96,12 +99,10 @@ export const updateTheAdmin = async (req, res) => {
         image: body.photo,
         adminName: body.fullName,
         adminEmail: body.email,
-      },
-      extraDeets: {
-        adminFullName: body.name,
         adminPhone: body.phone,
         adminAddress: body.address,
         adminCountry: body.country,
+        dr: req.yes,
       },
     });
   } catch (error) {

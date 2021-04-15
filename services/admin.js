@@ -59,18 +59,21 @@ export const updateUserbyAdmin = async (data, email) => {
   return db.oneOrNone(updateUserStatusbyEmail, [applicationStatus, email]);
 };
 
-export const updateAdminDetails = async (adminId, data) => {
-  const {
-    fullName, email, phone, address, country, photo,
-  } = data;
+export const updateAdminDetails = async (admin, data) => {
+  // eslint-disable-next-line no-param-reassign
+  data.full_name = data.fullName;
+  // eslint-disable-next-line no-param-reassign
+  data.photo_url = data.photo;
+  console.log(admin, data);
+  const obj = { ...admin, ...data };
   db.none(updateAdmin, [
-    fullName,
-    email,
-    phone,
-    address,
-    country,
-    photo,
-    adminId]);
+    obj.full_name,
+    obj.email,
+    obj.phone,
+    obj.address,
+    obj.country,
+    obj.photo_url,
+    obj.admin_id]);
 };
 
 export const updateUserApprovalStatus = async (userId, data) => (

@@ -5,7 +5,8 @@
 import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
-  getUserByEmail, insertNewUser, updateUser, getUserById, selectQuestionsByBatchId,
+  getUserByEmail, insertNewUser, updateUser, getUserById,
+  selectQuestionsByBatchId,
   getCurrentBatchUser, selectAllQuestionsInBatch, saveScore,
   updateUserPasswordByEmail, quizTimeForBatch,
 } from '../db/queries/user';
