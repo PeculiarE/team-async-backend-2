@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   registerNewUser, loginUser, createApplication, returnSingleUser,
-  resetPassword, updatePassword, retrieveQuestions, getAllQuestions, saveTestScore,
+  resetPassword, updatePassword, getQuizTime, getAllQuestions, saveTestScore,
 } from '../controllers';
 import {
   authenticate, validateNewUserData, checkIfUserAlreadyExistsForCurrentBatch, validateLoginData,
@@ -16,8 +16,8 @@ userRouter.post('/application', authenticate, cloudinaryUpload, validateApplicat
 userRouter.get('/user/dashboard/:userid', returnSingleUser);
 userRouter.post('/user/reset', resetPassword);
 userRouter.put('/resetpassword/:token', updatePassword);
-userRouter.get('/user/assessment', authenticate, getUserBatch, retrieveQuestions);
 userRouter.get('/user/assessment_questions', authenticate, getUserBatch, getAllQuestions);
-userRouter.post('/user/quiz_answers', authenticate, getUserProfile, saveTestScore);
+userRouter.post('/user/quiz_results', authenticate, getUserProfile, saveTestScore);
+userRouter.get('/user/quiz_time', authenticate, getUserBatch, getQuizTime);
 
 export default userRouter;

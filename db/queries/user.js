@@ -51,7 +51,7 @@ export const selectQuestionsByBatchId = `
 `;
 
 export const selectAllQuestionsInBatch = `
-    select * from questions_table
+    select * from assessments
     where batch_id = $1;
     `;
 
@@ -62,3 +62,8 @@ set
     updated_at = NOW()
 where user_id = $2
 returning test_score;`;
+
+export const quizTimeForBatch = `
+    select total_time from assessment_details
+    where batch_id = $1;
+    `;

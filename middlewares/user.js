@@ -91,6 +91,7 @@ export const validateApplication = (req, res, next) => {
 };
 
 export const getUserProfile = async (req, res, next) => {
+  console.log(req.body);
   try {
     const applicant = await getSingleUserById(req.entrant.id);
     if (applicant) {
@@ -113,11 +114,10 @@ export const getUserProfile = async (req, res, next) => {
 export const getUserBatch = async (req, res, next) => {
   try {
     const userId = req.entrant.id;
-    console.log(userId);
     const user = await getSingleUserById(userId);
-    console.log(user);
     if (user) {
       req.batch = user.batch_id;
+      console.log(req.batch);
       return next();
     }
     return res.status(400).json({

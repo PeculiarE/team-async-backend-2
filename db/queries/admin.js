@@ -31,7 +31,7 @@ export const getCurrentBatch = `
 select max(batch_id) from application_info;
 `;
 
-export const insertQuestions = `insert into assessment_questions (
+export const insertQuestions = `insert into assessments (
     question_id,
     batch_id,
     admin_id,
@@ -40,9 +40,8 @@ export const insertQuestions = `insert into assessment_questions (
     option_b,
     option_c,
     option_d,
-    ans,
-    total_questions,
-    total_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
+    file,
+    correct_option) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
 `;
 
 export const insertAssessmentDetails = `insert into assessment_details (

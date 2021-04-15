@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import {
   addNewUser, getSingleUserByEmail, newApplication,
   updateUserPassword, checkCurrentBatchUser, getSingleUserById, getQuestions, getQuestionsInDb,
-  inputTestScore,
+  inputTestScore, getBatchTime,
 } from '../services';
 
 import {
@@ -37,9 +37,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const batchId = await checkCurrentBatchUser();
-    console.log(batchId);
     const user = await getSingleUserByEmail(email);
-    console.log(user);
     if (!user) {
       return res.status(401).json({
         status: 'Fail',
@@ -221,15 +219,31 @@ export const getAllQuestions = async (req, res) => {
   }
 };
 
-export const saveTestScore = async (req, res) => {
+export const getQuizTime = async (req, res) => {
   try {
-    const applicant = req.user;
-    await inputTestScore(req.body, applicant.user_id);
+    console.log(req.batch);
+    const time = await getBatchTime(req.batch);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Questions fetched successfully',
+      data: time,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveTestScore = async (req, res) => {
+  const payload = req.body;
+  console.log(payload);
+  try {
+    await inputTestScore(payload, req.user.user_id);
     res.status(200).json({
       status: 'Success',
       message: 'Test score recorded successfully.',
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       status: 'Success',
       message: 'Something went wrongy.',
