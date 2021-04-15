@@ -1,7 +1,7 @@
 // import { getCurrentBatch } from '../db/queries/admin';
 import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
-  updateUserbyAdmin, getAllUsers, updateAdminDetails, recordQuestion, updateUserApprovalStatus,
+  updateUserbyAdmin, getAllUsers, updateAdminDetails, updateUserApprovalStatus,
   getEntriesSummary, checkCurrentBatch, getUsersInBatch,
 } from '../services';
 
@@ -67,17 +67,20 @@ export const sendNewApplication = async (req, res) => {
 };
 
 export const populateQuestions = async (req, res) => {
+  // console.log('populate', req.body);
   try {
     const adminId = req.entrant.id;
-    await addQuestions(adminId, req.body.arr);
+    const a = await addQuestions(adminId, req.body);
     return res.status(200).json({
       status: 'Success',
       message: 'Questions added successfully',
+      data: a,
     });
   } catch (error) {
+    console.log('error', error);
     return res.status(500).json({
       status: 'Fail',
-      message: 'Something went wrong',
+      message: 'Something went wronger',
     });
   }
 };
@@ -133,21 +136,6 @@ export const returnAllUsers = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'fail', message: 'Something went wrong.' });
-  }
-};
-
-export const postQuestions = async (req, res) => {
-  try {
-    await recordQuestion(req.body);
-    res.status(201).json({
-      status: 'success',
-      message: 'Question recorded successfully.',
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: 'fail',
-      message: 'Something went wrong here.',
-    });
   }
 };
 

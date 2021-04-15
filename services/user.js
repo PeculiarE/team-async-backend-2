@@ -5,10 +5,9 @@
 import { generateUUID } from '../utils';
 import db from '../db/setup';
 import {
-  getUserByEmail, insertNewUser, updateUser, getUserById,
-  updateUserPasswordById, selectQuestionsByBatchId,
+  getUserByEmail, insertNewUser, updateUser, getUserById, selectQuestionsByBatchId,
   getCurrentBatchUser, selectAllQuestionsInBatch, saveScore,
-  updateUserPasswordByEmail,
+  updateUserPasswordByEmail, quizTimeForBatch,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.manyOrNone(getUserByEmail, [email]);
@@ -54,13 +53,17 @@ export const getQuestions = async (batchId) => db.many(selectQuestionsByBatchId,
 
 export const getQuestionsInDb = async (batchId) => db.many(selectAllQuestionsInBatch, [batchId]);
 
-export const inputTestScore = async ({ data }, userId) => {
+export const getBatchTime = async (batchId) => db.one(quizTimeForBatch, [batchId]);
+
+export const inputTestScore = async (payload, userId) => {
   let count = 0;
-  for (const item of data.chosenAnswers) {
-    const answer = data.correctAnswers.find((el) => el.question_id === item.question_id);
-    if (item.correct_option === answer.correct_option) {
+  for (const item of payload.chosenAnswers) {
+    const answer = payload.correctAnswers.find((el) => el.question_id === item.id);
+    if (item.value === answer.correct_option) {
       count += 1;
+      console.log(count);
     }
+    console.log(count);
   }
   console.log(count);
   return db.one(saveScore, [count, userId]);

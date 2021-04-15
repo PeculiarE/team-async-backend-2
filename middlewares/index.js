@@ -1,4 +1,6 @@
-import { cloudinaryUpload, cloudinaryUploadTwo, cloudinaryUploadThree } from './upload';
+import {
+  cloudinaryUpload, cloudinaryUploadTwo, cloudinaryUploadThree, cloudinaryUploadFour,
+} from './upload';
 import {
   validateNewUserData,
   checkIfUserAlreadyExistsForCurrentBatch, validateLoginData, validateApplication,
@@ -26,6 +28,7 @@ export {
   getUserBatch,
   validateAdminUpdateData,
   cloudinaryUploadThree,
+  cloudinaryUploadFour,
   validateQuestion,
   getAdminProfile,
 };

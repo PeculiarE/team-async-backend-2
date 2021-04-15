@@ -57,9 +57,22 @@ const cloudinaryConfigUpdate = async (photoPath) => {
   }
 };
 
+const cloudinaryConfigQuestions = async (questionFilesPath) => {
+  try {
+    const questionFileData = await cloudinary.v2.uploader.upload(questionFilesPath);
+    console.log('confiq', questionFileData);
+    const data = [questionFileData];
+    console.log('confiq', data);
+    return questionFileData;
+  } catch (error) {
+    console.log('confiq', error);
+    return error;
+  }
+};
+
 export {
   cloudinaryConfig,
   generateUUID,
   convertDataToToken, verifyToken, hashPassword, comparePassword,
-  cloudinaryConfigAd, cloudinaryConfigUpdate,
+  cloudinaryConfigAd, cloudinaryConfigUpdate, cloudinaryConfigQuestions,
 };
