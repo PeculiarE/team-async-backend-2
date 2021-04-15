@@ -91,17 +91,17 @@ export const populateQuestions = async (req, res) => {
 export const updateTheAdmin = async (req, res) => {
   try {
     const { body, admin } = req;
-    await updateAdminDetails(admin, body);
+    const updated = await updateAdminDetails(admin, body);
     return res.status(200).json({
       status: 'Success',
       message: 'Details updated successfully',
       deets: {
-        image: body.photo,
-        adminName: body.fullName,
-        adminEmail: body.email,
-        adminPhone: body.phone,
-        adminAddress: body.address,
-        adminCountry: body.country,
+        image: updated.photo_url,
+        adminName: updated.full_name,
+        adminEmail: updated.email,
+        adminPhone: updated.phone,
+        adminAddress: updated.address,
+        adminCountry: updated.country,
         dr: req.yes,
       },
     });
