@@ -1,8 +1,8 @@
 import {
-  loginAdmin, authVerified, sendNewApplication, populateQuestions,
+  loginAdmin, authVerified, sendNewApplication, saveQuestions,
   updateUserApplicationStatus, updateTheAdmin,
   returnAllUsers, updateTheUserApprovalStatus, retrieveEntriesSummary,
-  returnUsersByBatch,
+  returnUsersByBatch, getAssessmentDetails,
 } from './admin';
 
 import {
@@ -12,8 +12,8 @@ import {
 
 export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
-  populateQuestions, returnSingleUser, resetPassword, updatePassword,
+  saveQuestions, returnSingleUser, resetPassword, updatePassword,
   updateUserApplicationStatus, returnAllUsers,
   retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus,
-  retrieveEntriesSummary, saveTestScore, returnUsersByBatch, getQuizTime,
+  retrieveEntriesSummary, saveTestScore, returnUsersByBatch, getQuizTime, getAssessmentDetails,
 };
