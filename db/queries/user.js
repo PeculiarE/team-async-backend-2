@@ -67,3 +67,7 @@ export const quizTimeForBatch = `
     select total_time from assessment_details
     where batch_id = $1;
     `;
+
+export const getTestScore = `
+select test_score from user_table
+where user_id = $1;`;

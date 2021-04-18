@@ -3,6 +3,7 @@ import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
   updateUserbyAdmin, getAllUsers, updateAdminDetails, updateUserApprovalStatus,
   getEntriesSummary, checkCurrentBatch, getUsersInBatch, getAssessmentHistory,
+  getQuestionsInBatch,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -203,5 +204,21 @@ export const getAssessmentDetails = async (req, res) => {
       status: 'Fail',
       message: 'Couldn\'t fetch',
     });
+  }
+};
+
+export const checkIfQuestionsForBatchAvailable = async (req, res) => {
+  try {
+    const batchId = await checkCurrentBatch();
+    console.log(batchId.max);
+    const questions = await getQuestionsInBatch(batchId.max);
+    console.log(questions);
+    res.status(200).json({
+      status: 'Success',
+      message: `Batch ${batchId.max} applicants fetched successfully`,
+      data: questions,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

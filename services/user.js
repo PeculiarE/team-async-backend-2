@@ -8,7 +8,7 @@ import {
   getUserByEmail, insertNewUser, updateUser, getUserById,
   selectQuestionsByBatchId,
   getCurrentBatchUser, selectAllQuestionsInBatch, saveScore,
-  updateUserPasswordByEmail, quizTimeForBatch,
+  updateUserPasswordByEmail, quizTimeForBatch, getTestScore,
 } from '../db/queries/user';
 
 export const getSingleUserByEmail = async (email) => db.manyOrNone(getUserByEmail, [email]);
@@ -69,3 +69,5 @@ export const inputTestScore = async (payload, userId) => {
   console.log(count);
   return db.one(saveScore, [count, userId]);
 };
+
+export const retrieveTestScore = async (userId) => db.one(getTestScore, [userId]);
