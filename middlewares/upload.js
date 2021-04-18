@@ -25,7 +25,7 @@ export const cloudinaryUploadTwo = async (req, res, next) => {
 
 export const cloudinaryUploadThree = async (req, res, next) => {
   try {
-    if (req.files === null) {
+    if (req.files === null || req.files === 'removed') {
       next();
       return;
     }
