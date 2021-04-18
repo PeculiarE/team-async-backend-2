@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   registerNewUser, loginUser, createApplication, returnSingleUser,
-  resetPassword, updatePassword, getQuizTime, getAllQuestions, saveTestScore,
+  resetPassword, updatePassword, getQuizTime, getAllQuestions, saveTestScore, verifyEmail,
 } from '../controllers';
 import {
   authenticate, validateNewUserData, checkIfUserAlreadyExistsForCurrentBatch, validateLoginData,
@@ -10,7 +10,8 @@ import {
 
 const userRouter = Router();
 
-userRouter.post('/register', validateNewUserData, checkIfUserAlreadyExistsForCurrentBatch, registerNewUser);
+userRouter.post('/register', validateNewUserData, checkIfUserAlreadyExistsForCurrentBatch, verifyEmail);
+userRouter.post('/verify/:token', registerNewUser);
 userRouter.post('/login', validateLoginData, loginUser);
 userRouter.post('/application', authenticate, cloudinaryUpload, validateApplication, getUserProfile, createApplication);
 userRouter.get('/user/dashboard/:userid', returnSingleUser);

@@ -15,18 +15,28 @@ dotenv.config();
 
 export const registerNewUser = async (req, res) => {
   try {
-    const encryptedPassword = hashPassword(req.body.password);
+    const { token } = req.params;
+    console.log(token);
+    const { err, data } = verifyToken(token);
+    console.log(err, data);
+    if (err) {
+      console.log(err);
+      return res
+        .status(401)
+        .json({ status: 'Fail', message: 'Verification link expired' });
+    }
+    const encryptedPassword = hashPassword(data.password);
     const userInfo = {
-      ...req.body,
+      ...data,
       password: encryptedPassword,
     };
     await addNewUser(userInfo);
-    res.status(201).json({
+    return res.status(201).json({
       status: 'Success',
-      message: 'Registration successful',
+      message: 'Verification successful',
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'Fail',
       message: 'Something went wrong',
     });
@@ -247,6 +257,52 @@ export const saveTestScore = async (req, res) => {
     res.status(500).json({
       status: 'Success',
       message: 'Something went wrongy.',
+    });
+  }
+};
+
+export const verifyEmail = async (req, res) => {
+  const transporter = nodemailer.createTransport({
+    // host: 'smtp.gmail.com',
+    service: 'gmail',
+    // port: 587,
+    // secure: false,
+    auth: {
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.PASS_WORD,
+    },
+  });
+  try {
+    const { email } = req.body;
+    // console.log(req.body);
+    const userToken = convertDataToToken(req.body);
+    const mailOptions = await transporter.sendMail({
+      from: `"Enyata Academy" <${process.env.SENDER_EMAIL}>`,
+      to: email,
+      subject: 'Email Verification',
+      text: `Thank you for registering for Enyata Academy. Please click on
+      <a href="http://localhost:8080/verifyuser/${userToken}">this link</a> to verify your email address`,
+      html: `Thank you for registering for Enyata Academy. Please click on
+      <a href="http://localhost:8080/verifyuser/${userToken}">this link</a> to verify your email address`,
+    });
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(info.response);
+      }
+    });
+    res.status(200).json({
+      status: 'Success',
+      message: `Registration successful! Please check your inbox and click on the provided link
+      to verify your email`,
+    });
+    // console.log('Message sent: %s', mailOptions.messageId);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wrong in controller',
     });
   }
 };

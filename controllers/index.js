@@ -7,13 +7,13 @@ import {
 
 import {
   createApplication, registerNewUser, loginUser, returnSingleUser, retrieveQuestions,
-  resetPassword, updatePassword, getAllQuestions, saveTestScore, getQuizTime,
+  resetPassword, updatePassword, getAllQuestions, saveTestScore, getQuizTime, verifyEmail,
 } from './user';
 
 export {
   createApplication, registerNewUser, loginUser, loginAdmin, authVerified, sendNewApplication,
   saveQuestions, returnSingleUser, resetPassword, updatePassword,
   updateUserApplicationStatus, returnAllUsers,
-  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus,
-  retrieveEntriesSummary, saveTestScore, returnUsersByBatch, getQuizTime, getAssessmentDetails,
+  retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus, getAssessmentDetails,
+  retrieveEntriesSummary, saveTestScore, returnUsersByBatch, getQuizTime, verifyEmail,
 };

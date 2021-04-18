@@ -65,11 +65,16 @@ export const updateUserbyAdmin = async (data, email) => {
 export const updateAdminDetails = async (admin, data) => {
   // eslint-disable-next-line no-param-reassign
   data.full_name = data.fullName;
-  // eslint-disable-next-line no-param-reassign
-  data.photo_url = data.photo;
+  if (data.photo === null || data.photo === 'null') {
+    // eslint-disable-next-line no-param-reassign
+    data.photo_url = admin.photo_url;
+  } else {
+    // eslint-disable-next-line no-param-reassign
+    data.photo_url = data.photo;
+  }
   console.log(admin, data);
   const obj = { ...admin, ...data };
-  db.none(updateAdmin, [
+  return db.one(updateAdmin, [
     obj.full_name,
     obj.email,
     obj.phone,
