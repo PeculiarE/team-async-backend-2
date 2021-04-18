@@ -2,12 +2,12 @@ import {
   loginAdmin, authVerified, sendNewApplication, saveQuestions,
   updateUserApplicationStatus, updateTheAdmin,
   returnAllUsers, updateTheUserApprovalStatus, retrieveEntriesSummary,
-  returnUsersByBatch, getAssessmentDetails,
+  returnUsersByBatch, getAssessmentDetails, checkIfQuestionsForBatchAvailable,
 } from './admin';
 
 import {
   createApplication, registerNewUser, loginUser, returnSingleUser, retrieveQuestions,
-  resetPassword, updatePassword, getAllQuestions, saveTestScore, getQuizTime,
+  resetPassword, updatePassword, getAllQuestions, saveTestScore, getQuizTime, getTestScore,
 } from './user';
 
 export {
@@ -16,4 +16,5 @@ export {
   updateUserApplicationStatus, returnAllUsers,
   retrieveQuestions, updateTheAdmin, getAllQuestions, updateTheUserApprovalStatus,
   retrieveEntriesSummary, saveTestScore, returnUsersByBatch, getQuizTime, getAssessmentDetails,
+  checkIfQuestionsForBatchAvailable, getTestScore,
 };

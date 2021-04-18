@@ -4,6 +4,7 @@ import {
   authVerified, sendNewApplication, saveQuestions, updateUserApplicationStatus,
   returnAllUsers, updateTheAdmin, updateTheUserApprovalStatus,
   retrieveEntriesSummary, returnUsersByBatch, getAssessmentDetails,
+  checkIfQuestionsForBatchAvailable,
 } from '../controllers';
 import {
   validateAdminLoginData,
@@ -29,5 +30,6 @@ adminRouter.post('/update', authenticate, updateTheUserApprovalStatus);
 adminRouter.get('/summary', authenticate, retrieveEntriesSummary);
 adminRouter.get('/allUsers', authenticate, returnUsersByBatch);
 adminRouter.get('/assessment_details', authenticate, getAssessmentDetails);
+adminRouter.get('/admin/assessment_questions', authenticate, checkIfQuestionsForBatchAvailable);
 
 export default adminRouter;

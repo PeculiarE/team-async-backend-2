@@ -5,6 +5,7 @@ import {
   getOneQuestion, updateApprovalStatus, getAllApplicantsByBatchId,
   fetchAllApplicantsInBatch, getAllAssessmentDetails,
 } from '../db/queries/admin';
+import { selectAllQuestionsInBatch } from '../db/queries/user';
 import { generateUUID } from '../utils';
 
 export const getSingleAdminByEmail = async (email) => db.oneOrNone(getAdminByEmail, [email]);
@@ -89,3 +90,6 @@ export const getUsersInBatch = async (batchId) => db.manyOrNone(fetchAllApplican
   [batchId]);
 
 export const getAssessmentHistory = async () => db.manyOrNone(getAllAssessmentDetails);
+
+// eslint-disable-next-line max-len
+export const getQuestionsInBatch = async (batchId) => db.manyOrNone(selectAllQuestionsInBatch, [batchId]);
