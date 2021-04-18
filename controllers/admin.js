@@ -2,7 +2,7 @@
 import {
   getSingleAdminByEmail, setNewApplication, addQuestions,
   updateUserbyAdmin, getAllUsers, updateAdminDetails, updateUserApprovalStatus,
-  getEntriesSummary, checkCurrentBatch, getUsersInBatch,
+  getEntriesSummary, checkCurrentBatch, getUsersInBatch, getAssessmentHistory,
 } from '../services';
 
 import { convertDataToToken } from '../utils';
@@ -65,25 +65,6 @@ export const sendNewApplication = async (req, res) => {
     return res.status(500).json({
       status: 'Fail',
       message: 'Something went wrong',
-    });
-  }
-};
-
-export const populateQuestions = async (req, res) => {
-  // console.log('populate', req.body);
-  try {
-    const adminId = req.entrant.id;
-    const a = await addQuestions(adminId, req.body);
-    return res.status(200).json({
-      status: 'Success',
-      message: 'Questions added successfully',
-      data: a,
-    });
-  } catch (error) {
-    console.log('error', error);
-    return res.status(500).json({
-      status: 'Fail',
-      message: 'Something went wronger',
     });
   }
 };
@@ -184,5 +165,43 @@ export const returnUsersByBatch = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const saveQuestions = async (req, res) => {
+  // console.log('populate', req.body);
+  try {
+    const adminId = req.entrant.id;
+    const a = await addQuestions(adminId, req.body);
+    return res.status(200).json({
+      status: 'Success',
+      message: 'Questions added successfully',
+      data: a,
+    });
+  } catch (error) {
+    console.log('error', error);
+    return res.status(500).json({
+      status: 'Fail',
+      message: 'Something went wronger',
+    });
+  }
+};
+
+export const getAssessmentDetails = async (req, res) => {
+  try {
+    const assessmentsHistory = await getAssessmentHistory();
+    console.log(assessmentsHistory);
+    res.status(200).json({
+      status: 'Success',
+      message: 'History fetched successfully',
+      data: assessmentsHistory,
+    });
+    // console.log(token);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'Fail',
+      message: 'Couldn\'t fetch',
+    });
   }
 };

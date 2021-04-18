@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import {
   loginAdmin,
-  authVerified, sendNewApplication, populateQuestions, updateUserApplicationStatus,
+  authVerified, sendNewApplication, saveQuestions, updateUserApplicationStatus,
   returnAllUsers, updateTheAdmin, updateTheUserApprovalStatus,
-  retrieveEntriesSummary, returnUsersByBatch,
+  retrieveEntriesSummary, returnUsersByBatch, getAssessmentDetails,
 } from '../controllers';
 import {
   validateAdminLoginData,
@@ -21,12 +21,13 @@ const adminRouter = Router();
 adminRouter.post('/adminlogin', validateAdminLoginData, loginAdmin);
 adminRouter.get('/adminverify', authenticate, authVerified);
 adminRouter.post('/adminapplication', authenticate, cloudinaryUploadTwo, validateAdminApplication, checkIfBatchAlreadyExists, sendNewApplication);
-adminRouter.post('/adminquestions', authenticate, populateQuestions);
+adminRouter.post('/adminquestions', authenticate, saveQuestions);
 adminRouter.put('/updateuserstatus/:email', authVerified, updateUserApplicationStatus);
 adminRouter.get('/admin/allusers', authenticate, returnAllUsers);
 adminRouter.post('/adminupdate', authenticate, cloudinaryUploadThree, validateAdminUpdateData, getAdminProfile, updateTheAdmin);
 adminRouter.post('/update', authenticate, updateTheUserApprovalStatus);
 adminRouter.get('/summary', authenticate, retrieveEntriesSummary);
 adminRouter.get('/allUsers', authenticate, returnUsersByBatch);
+adminRouter.get('/assessment_details', authenticate, getAssessmentDetails);
 
 export default adminRouter;

@@ -33,6 +33,7 @@ select max(batch_id) from application_info;
 
 export const insertQuestions = `insert into assessments (
     question_id,
+    question_no,
     batch_id,
     admin_id,
     question,
@@ -41,7 +42,7 @@ export const insertQuestions = `insert into assessments (
     option_c,
     option_d,
     file,
-    correct_option) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+    correct_option) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
 `;
 
 export const insertAssessmentDetails = `insert into assessment_details (
@@ -63,17 +64,6 @@ export const updateAdmin = `
     updated_at = NOW() WHERE admin_id = $7
     returning *;`;
 
-export const insertAssessmentQuestions = `
-insert into questions_table (
-    question_id,
-    question,
-    option_a,
-    option_b,
-    option_c,
-    option_d,
-    correct_option,
-    batch_id) values ($1, $2, $3, $4, $5, $6, $7, $8);`;
-
 export const getOneQuestion = 'select question from questions_table where question = $1;';
 
 export const updateApprovalStatus = `
@@ -92,4 +82,8 @@ export const fetchAllApplicantsInBatch = `
     select full_name, email, date(dob), age, address, university, cgpa, test_score
     from user_table
     where batch_id = $1;
+    `;
+
+export const getAllAssessmentDetails = `
+    select * from assessment_details;
     `;
