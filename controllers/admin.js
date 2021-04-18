@@ -215,7 +215,7 @@ export const checkIfQuestionsForBatchAvailable = async (req, res) => {
     console.log(questions);
     res.status(200).json({
       status: 'Success',
-      message: `Batch ${batchId.max} applicants fetched successfully`,
+      message: `Batch ${batchId.max} questions fetched successfully`,
       data: questions,
     });
   } catch (error) {

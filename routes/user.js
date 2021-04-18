@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import {
   registerNewUser, loginUser, createApplication, returnSingleUser,
-  resetPassword, updatePassword, getQuizTime, getAllQuestions, saveTestScore, getTestScore, verifyEmail,
+  resetPassword, updatePassword, getQuizTime, getAllQuestions, saveTestScore,
+  getTestScore, verifyEmail,
 } from '../controllers';
 import {
   authenticate, validateNewUserData, checkIfUserAlreadyExistsForCurrentBatch, validateLoginData,
